@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MarunakaDeOkaimono_test</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="edit_massage">Enter a message</string>
+    <string name="buttun_send">Send</string>
+</resources>
