@@ -14,11 +14,28 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        String waonMessage   = intent.getStringExtra("WAON");
+        String secureMessage = intent.getStringExtra("SECURE");
+        String idMessage   = intent.getStringExtra("ID");
+        String passMessage = intent.getStringExtra("PASS");
+        String userMessage   = intent.getStringExtra("USER");
 
         // Capture the layout's TextView and set the string as its text
-        TextView textView = findViewById(R.id.textView);
-        textView.setText(message);
+        TextView waon = findViewById(R.id.textView);
+        waon.setText(waonMessage);
+
+        TextView secure = findViewById(R.id.textView2);
+        secure.setText(secureMessage);
+
+        TextView id = findViewById(R.id.textView3);
+        id.setText(idMessage);
+
+        TextView pass = findViewById(R.id.textView4);
+        pass.setText(passMessage);
+
+        TextView user = findViewById(R.id.textView5);
+        user.setText(userMessage);
+
 
     }
 }

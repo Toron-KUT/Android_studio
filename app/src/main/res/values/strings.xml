@@ -3,6 +3,12 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="edit_massage">Enter a message</string>
+    <string name="waon_massage">waon_number</string>
+    <string name="secure_massage">secure_code</string>
+    <string name="id_massage">login_id</string>
+    <string name="pass_massage">password</string>
+    <string name="name_massage">username</string>
     <string name="buttun_send">Send</string>
+
+    <string name="null_string">null</string>
 </resources>
