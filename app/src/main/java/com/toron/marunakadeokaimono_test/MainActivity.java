@@ -78,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+    //テスト用転送
+    public void gotest(View view){
+        Intent intent = new Intent(this, DatabaseConnectTestActivity.class);
+        startActivity(intent);
+    }
 
 
 }
