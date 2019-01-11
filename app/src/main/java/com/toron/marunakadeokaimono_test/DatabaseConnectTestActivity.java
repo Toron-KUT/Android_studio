@@ -33,11 +33,13 @@ public class DatabaseConnectTestActivity extends AppCompatActivity {
 
 
         //ボタンが押された時の挙動を記述
-        //中身にあるかどうかで判別
+        //データベースヘルパーがなければ作成
         Button insertButton = findViewById(R.id.button_insert);
         insertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                deleteDatabase("TestDB.db");
 
                 if (helper == null) {
                     helper = new DatabaseHelper(getApplicationContext());
@@ -75,7 +77,8 @@ public class DatabaseConnectTestActivity extends AppCompatActivity {
 
         Cursor cursor = db.query(
                 "testdb",
-                new String[] { "company", "stockprice" },
+                new String[] { "company", "stockprice" }
+                ,
                 null,
                 null,
                 null,

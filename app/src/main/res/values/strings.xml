@@ -18,4 +18,5 @@
     <string name="insert">insert</string>
     <string name="read">read</string>
     <string name="send_test">go test</string>
+    <string name="go_next">次へ</string>
 </resources>
