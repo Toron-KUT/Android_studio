@@ -63,13 +63,12 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     }
     public void SetRegistrationUser(String waon,String secure,String id, String pass, String user ){
-        //if(helper == null) {
+        if(helper == null) {
         helper = new DatabaseHelper(getApplicationContext());
-        //}
-        //if(db == null ) {
-        //deleteDatabase("TestDB.db");
+        }
+        if(db == null ) {
         db = helper.getWritableDatabase();
-        //}
+        }
 
         insertData(db, "u", waon, secure, id, pass, user);
 

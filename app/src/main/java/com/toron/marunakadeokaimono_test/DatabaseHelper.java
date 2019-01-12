@@ -2,6 +2,7 @@ package com.toron.marunakadeokaimono_test;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
@@ -48,6 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     COLUMN_NAME_POINTS + " INTEGER)";
 
     //テーブル削除文の発行
+
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + TABLE_NANE_TEST;
     private static final String SQL_DELETE_USERS =
@@ -57,29 +59,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     private void createTable_Entries(SQLiteDatabase db) {
+        try {
+            db.execSQL(SQL_CREATE_ENTRIES);
 
-        db.execSQL(
-                SQL_CREATE_ENTRIES
-        );
+        }catch(SQLiteException e){
+             Log.d("debug",e.getMessage());
+        }finally{
+        Log.d("debug", "test table create sccess");
+        }
     }
     private void createTable_User(SQLiteDatabase db) {
-
-        db.execSQL(
-                SQL_CREATE_USER
-        );
-        Log.d("debug","Users table create sccess");
+        try {
+            db.execSQL(SQL_CREATE_USER);
+        } catch (SQLiteException e) {
+            Log.d("debug", e.getMessage());
+        } finally {
+            Log.d("debug", "user table create sccess");
+        }
     }
     private void deleteTable(SQLiteDatabase db) {
-
-        db.execSQL(
-                SQL_DELETE_ENTRIES
-
-        );
-
-        db.execSQL(
-                SQL_DELETE_USERS
-        );
-
+        try{
+            db.execSQL(SQL_DELETE_ENTRIES);
+            db.execSQL(SQL_DELETE_USERS);
+        }catch (SQLiteException e) {
+            Log.d("debug", e.getMessage());
+        } finally {
+            Log.d("debug", "all table delete sccess");
+        }
     }
 
 
@@ -87,7 +93,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //テーブル作成
         Log.d(DATABASE_NAME , "onCreate version : " + db.getVersion());
-
         createTable_Entries(db);
         createTable_User(db);
         Log.d(DATABASE_NAME , "onCreated version : " + db.getVersion());

@@ -39,7 +39,7 @@ public class DatabaseConnectTestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                deleteDatabase("TestDB.db");
+                //deleteDatabase("TestDB.db");
 
                 if (helper == null) {
                     helper = new DatabaseHelper(getApplicationContext());

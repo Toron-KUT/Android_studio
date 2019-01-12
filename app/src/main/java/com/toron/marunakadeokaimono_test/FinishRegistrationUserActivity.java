@@ -68,7 +68,7 @@ public class FinishRegistrationUserActivity extends AppCompatActivity {
 
                 cursor.moveToNext();
             } catch (SQLiteException e) {
-                value = "<unprintable>";
+                Log.d("debud","SQLError" + e.getMessage());
             }
             Log.d("dumpLastRecord", columnNames[i] + " : " + value);
 
