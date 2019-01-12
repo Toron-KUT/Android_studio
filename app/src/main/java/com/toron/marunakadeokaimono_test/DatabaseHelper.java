@@ -99,7 +99,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Log.d("debug", "all table delete sccess");
         }
     }
-    public static List<Object> GetHoldingFoodData(SQLiteDatabase db){
+    public  List<Object> GetHoldingFoodData(SQLiteDatabase db){
         List<Object>HoldList = new ArrayList<Object>();
         Cursor c = null;
         int f = 0;

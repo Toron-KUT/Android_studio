@@ -60,6 +60,13 @@ public class HoldingFoodActivity extends AppCompatActivity {
 
     private void ShowHoldingFoodData(){
         try{
+            if (helper == null) {
+                helper = new DatabaseHelper(getApplicationContext());
+            }
+            if (db == null) {
+                db = helper.getReadableDatabase();
+
+            }
             List<Object> HoldList = helper.GetHoldingFoodData(db);
             if(HoldList!=null){
                 Log.d("debug","HoldList success");
