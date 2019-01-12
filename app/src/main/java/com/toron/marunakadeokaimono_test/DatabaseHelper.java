@@ -1,11 +1,13 @@
 package com.toron.marunakadeokaimono_test;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -97,7 +99,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Log.d("debug", "all table delete sccess");
         }
     }
-    public static List<Object> GetHoldingFoodData(){
+    public static List<Object> GetHoldingFoodData(SQLiteDatabase db){
+        List<Object>HoldList = new ArrayList<Object>();
+        Cursor c = null;
+        int f = 0;
+        try{
+            c = db.rawQuery("Select * from hold",null);
+
+            if(c.moveToFirst()){
+                do{
+                    String mProduct_Name = c.getString(c.getColumnIndex("product_name"));
+                    int mNum = c.getInt(c.getColumnIndex("num"));
+                    double mCreateDate = c.getDouble(c.getColumnIndex("createDate"));
+
+                    HoldList.add(mProduct_Name);
+                    HoldList.add(mNum);
+                    HoldList.add(mCreateDate);
+                    f++;
+
+                }
+                while(c.moveToNext());
+            }
+            else{
+                HoldList = null;
+                Log.d("debug","List = null");
+            }
+            Log.d("debug","List get count = " +f);
+
+
+
+        }catch(SQLiteException e){
+            Log.d("debug","get holdtable data failed" + e.getMessage());
+        }
+        return HoldList;
 
 
 

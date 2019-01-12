@@ -84,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DatabaseConnectTestActivity.class);
         startActivity(intent);
     }
+    public void goholding(View view){
+        Intent intent = new Intent(this, HoldingFoodActivity.class);
+        startActivity(intent);
+    }
 
 
 }

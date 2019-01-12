@@ -30,7 +30,15 @@
                 android:value=".MainActivity" />
         </activity>
         <activity android:name=".DatabaseConnectTestActivity" />
-        <activity android:name=".FinishRegistrationUserActivity"></activity>
+        <activity android:name=".FinishRegistrationUserActivity" />
+        <activity
+            android:name=".HoldingFoodActivity"
+            android:label="@string/title_activity_holding_food"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.toron.marunakadeokaimono_test.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

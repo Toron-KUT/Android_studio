@@ -19,4 +19,5 @@
     <string name="read">read</string>
     <string name="send_test">go test</string>
     <string name="go_next">次へ</string>
+    <string name="title_activity_holding_food">HoldingFoodActivity</string>
 </resources>
