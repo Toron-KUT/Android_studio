@@ -70,7 +70,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         db = helper.getWritableDatabase();
         }
 
-        insertData(db, "u", waon, secure, id, pass, user);
+        insertData(db, "users", waon, secure, id, pass, user);
 
 
 
@@ -88,7 +88,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
             values.put("store_id", (String) null);
             values.put("points", (Integer) null);
 
-            db.insert("u", null, values);
+            db.insert(tablename, null, values);
         }catch (SQLiteException e) {
             Log.d("debug","insert error" ) ;
         }

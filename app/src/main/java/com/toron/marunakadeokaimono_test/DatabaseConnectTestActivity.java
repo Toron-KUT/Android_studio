@@ -3,6 +3,7 @@ package com.toron.marunakadeokaimono_test;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -110,5 +111,32 @@ public class DatabaseConnectTestActivity extends AppCompatActivity {
         values.put("stockprice", price);
 
         db.insert("testdb", null, values);
+    }
+
+    public void SetTestTable(View v){
+        try{
+            if (helper == null) {
+                helper = new DatabaseHelper(getApplicationContext());
+            }
+            if (db == null) {
+                db = helper.getWritableDatabase();
+
+            }
+            db.execSQL("insert into hold(product_name,num,createDate,updateDate) values('Yamada',10,'2001/4/1','2002/3/31')");
+            db.execSQL("insert into history(product_name,num,price,createDate,updateDate) values('大根',10,200,'2001/4/1','2002/3/31')");
+            db.execSQL("insert into stores(store_name,createDate,updateDate) values('マルナカ高知店','2001/4/1','2002/3/31')");
+
+            final TextView log = findViewById(R.id.textView15);
+            log.setText("create success");
+
+        }catch(SQLiteException e){
+            Log.d("debug", "create test data failed " + e.getMessage());
+        }finally{
+            Log.d("debug", "test table insert data sccess");
+        }
+
+
+
+
     }
 }

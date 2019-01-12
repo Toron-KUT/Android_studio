@@ -36,7 +36,7 @@ public class FinishRegistrationUserActivity extends AppCompatActivity {
         //String sql = "select * from u";
         //Cursor cursor = db.rawQuery(sql,null);
         Cursor cursor = db.query(
-                "u",
+                "users",
                 new String[] { "user_id", "login_id" ,"name","ruby","password","waon","security"} ,
                 null,
                 null,
