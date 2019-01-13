@@ -6,6 +6,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +40,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static String COLUMN_NAME_SECURITY = "security";
     private static String COLUMN_NAME_STORE_ID = "store_id";
     private static String COLUMN_NAME_POINTS = "points";
+
+    private RequestQueue mQueue;
 
     //テーブル作成文の発行
     private static final String SQL_CREATE_ENTRIES =
@@ -101,6 +111,50 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Log.d("debug", "all table delete sccess");
         }
     }
+
+    public void startVolley(Context c) {
+
+        //queue
+
+        RequestQueue postQueue = Volley.newRequestQueue(c);
+
+        //サーバーのアドレス任意
+        String POST_URL="http://172.21.48.131/.php";
+
+        StringRequest stringReq=new StringRequest(Request.Method.POST,POST_URL,
+
+                //通信成功
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        Log.d("degug","通信に成功しました" + s.toString());
+                    }
+                },
+
+                //通信失敗
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        Log.d("degug","通信に失敗しました");
+                    }
+                }){
+
+            //送信するデータを設定
+            @Override
+            protected Map<String,String> getParams(){
+
+                //今回は[FastText：名前]と[SecondText：内容]を設定
+                Map<String,String> params = new HashMap<String,String>();
+                //params.put("FastText",name.getText().toString());
+                //params.put("SecondText",text.getText().toString());
+                params.put("testtext","aaaa");
+                return params;
+            }
+        };
+
+        postQueue.add(stringReq);
+    }
+
     public boolean CheckAuthenticationUser(Map<String,Object> mAuthenticationData){
         try{
             //デバッグ
