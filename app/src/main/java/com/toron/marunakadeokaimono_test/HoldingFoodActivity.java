@@ -90,12 +90,23 @@ public class HoldingFoodActivity extends AppCompatActivity {
             mHoldingFoodData_Product_Name = findViewById(R.id.textView21);
             mHoldingFoodData_Num = findViewById(R.id.textView22);
             mHoldingFoodData_CreateDate = findViewById(R.id.textView23);
+            StringBuilder sbuilder_Product_Name = new StringBuilder();
+            StringBuilder sbuilder_Num = new StringBuilder();
+            StringBuilder sbuilder_CreateDate= new StringBuilder();
+
             for(int i = 0;i < mHoldingFoodList.size();i++) {
                 Map<String, Object> mFoodData = mHoldingFoodList.get(i);
-                mHoldingFoodData_Product_Name.setText(mFoodData.get("product_name").toString());
-                mHoldingFoodData_Num.setText(mFoodData.get("num").toString());
-                mHoldingFoodData_CreateDate.setText(mFoodData.get("product_name").toString());
+
+                sbuilder_Product_Name.append(mFoodData.get("product_name").toString() + "\n");
+                sbuilder_Num.append(mFoodData.get("num").toString() + "\n");
+                sbuilder_CreateDate.append(mFoodData.get("createDate").toString() + "\n");
+
+
             }
+            mHoldingFoodData_Product_Name.setText(sbuilder_Product_Name.toString());
+            mHoldingFoodData_Num.setText(sbuilder_Num.toString());
+            mHoldingFoodData_CreateDate.setText(sbuilder_CreateDate.toString());
+
             Log.d("debug","mHoldingFoodList.size=" + mHoldingFoodList.size());
 
         }catch(NullPointerException e){
