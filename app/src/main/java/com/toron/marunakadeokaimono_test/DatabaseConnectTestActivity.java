@@ -122,9 +122,10 @@ public class DatabaseConnectTestActivity extends AppCompatActivity {
                 db = helper.getWritableDatabase();
 
             }
-            db.execSQL("insert into hold(product_name,num,createDate,updateDate) values('Yamada',10,'2001/4/1','2002/3/31')");
-            db.execSQL("insert into history(product_name,num,price,createDate,updateDate) values('大根',10,200,'2001/4/1','2002/3/31')");
-            db.execSQL("insert into stores(store_name,createDate,updateDate) values('マルナカ高知店','2001/4/1','2002/3/31')");
+            db.execSQL("insert into hold(product_name,num,createDate) values('Yamada',10,'2001/4/1')");
+            db.execSQL("insert into history(product_name,num,price,createDate) values('大根',10,200,'2001/4/1')");
+            db.execSQL("insert into stores(store_name) values('マルナカ高知店')");
+
 
             final TextView log = findViewById(R.id.textView15);
             log.setText("create success");

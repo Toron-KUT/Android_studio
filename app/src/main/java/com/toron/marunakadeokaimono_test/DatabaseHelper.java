@@ -60,7 +60,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     _ID + " INTEGER PRIMARY KEY," +
                     "product_name" + " TEXT," +
                     "num"+ " INTEGER," +
-                    "createDate"+ " NUMERIC)";
+                    "createDate"+ " NUMERIC," +
+                    "updateDate"+ " NUMERIC)";
 
     //履歴テーブルを作成
     private static final String SQL_CREATE_HISTORY =
@@ -69,13 +70,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     "product_name"+ " TEXT,"+
                     "num"+ " INTEGER," +
                     "price"+ " INTEGER," +
-                    "createDate"+ " NUMERIC)";
+                    "createDate"+ " NUMERIC," +
+                    "updateDate"+ " NUMERIC)";
 
     //店テーブルを作成
     private static final String SQL_CREATE_STORES =
             "CREATE TABLE " + "stores" + " (" +
                     _ID + " INTEGER PRIMARY KEY," +
-                    "store_name" + " TEXT)";
+                    "store_name" + " TEXT," +
+                    "createDate"+ " NUMERIC," +
+                    "updateDate"+ " NUMERIC)";
     //テーブル削除文の発行
 
     private static final String SQL_DELETE_ENTRIES =
@@ -110,6 +114,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
     }
+
     public  List<Map<String,Object>> GetHoldingFoodData(SQLiteDatabase db){
         List<Map<String,Object>>HoldList = new ArrayList<Map<String,Object>>();
         Map<String,Object> mFoodData;
