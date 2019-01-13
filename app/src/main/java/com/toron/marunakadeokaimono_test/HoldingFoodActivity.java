@@ -99,13 +99,14 @@ public class HoldingFoodActivity extends AppCompatActivity {
 
                 sbuilder_Product_Name.append(mFoodData.get("product_name").toString() + "\n");
                 sbuilder_Num.append(mFoodData.get("num").toString() + "\n");
-                sbuilder_CreateDate.append(mFoodData.get("createDate").toString() + "\n");
+                sbuilder_CreateDate.append(mFoodData.get("createdate").toString() + "\n");
+                Log.d("debug","i= " + i);
 
 
             }
             mHoldingFoodData_Product_Name.setText(sbuilder_Product_Name.toString());
-            mHoldingFoodData_Num.setText(sbuilder_Num.toString());
-            mHoldingFoodData_CreateDate.setText(sbuilder_CreateDate.toString());
+            //mHoldingFoodData_Num.setText(sbuilder_Num.toString());
+            //mHoldingFoodData_CreateDate.setText(sbuilder_CreateDate.toString());
 
             Log.d("debug","mHoldingFoodList.size=" + mHoldingFoodList.size());
 
