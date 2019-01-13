@@ -151,7 +151,8 @@ public class DatabaseConnectTestActivity extends AppCompatActivity {
                 db = helper.getWritableDatabase();
 
             }
-            helper.readVolly(this);
+            helper.startVolley(this);
+            //helper.readVolly(this);
         }catch(NullPointerException e){
             Log.d("debug","out!!");
         }

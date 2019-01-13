@@ -16,6 +16,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -120,17 +122,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //queue
 
         RequestQueue postQueue = Volley.newRequestQueue(c);
+        postQueue.stop();
+        postQueue.start();
 
         //サーバーのアドレス任意
-        String POST_URL="http://172.21.48.131/test/SDataPostPHP2.php";
+        String POST_URL="http://172.21.48.131/test/SDataPostPHP3.php";
 
-        StringRequest stringReq=new StringRequest(Request.Method.POST,POST_URL,
+        StringRequest stringReq=new StringRequest(Request.Method.GET,POST_URL,
 
                 //通信成功
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
-                        Log.d("degug","通信に成功しました" + s.toString());
+                        try{
+                            Log.d("degug","通信に成功しました");
+                            JSONObject mJSONObject = new JSONObject(s);
+                            String title = mJSONObject.getJSONObject("0").getString("userid");
+
+                            Log.d("debug", "aaaaa" + title.toString() );
+                            //if (mJSONArray[0]["userid"] =="eat") {
+                            //    Log.d("debug","万歳太郎");
+                            //}
+                        }catch(JSONException e){
+                            Log.d("degug","JSONエラー" + e.getMessage());
+                        }
+
                     }
                 },
 
@@ -140,33 +156,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     public void onErrorResponse(VolleyError error){
                         Log.d("degug","通信に失敗しました");
                     }
-                }){
-
-            //送信するデータを設定
-            @Override
-            protected Map<String,String> getParams(){
-
-                //今回は[FastText：名前]と[SecondText：内容]を設定
-                Map<String,String> params = new HashMap<String,String>();
-                //params.put("FastText",name.getText().toString());
-                //params.put("SecondText",text.getText().toString());
-                params.put("select","select * from test2");
-                params.put("test","userid,password");
-                return params;
-            }
-        };
+                });
 
         postQueue.add(stringReq);
     }
+
     public void readVolly(Context c){
+        //queue
+        RequestQueue getQueue=Volley.newRequestQueue(c);
         //サーバーのアドレス任意
         String POST_URL="http://172.21.48.131/test/SDataPostPHP3.php";
 
-        //queue
-        RequestQueue getQueue=Volley.newRequestQueue(c);
-
-
-        JsonObjectRequest mRequest = new JsonObjectRequest(Request.Method.POST,POST_URL,
+        JsonObjectRequest mRequest = new JsonObjectRequest(Request.Method.GET,POST_URL,
 
                 // 通信成功
                 new Response.Listener<JSONObject>() {
@@ -182,24 +183,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("debug","通信失敗");
+                        Log.d("debug", "通信失敗" + error.getMessage());
                         //Toast.makeText(MainActivity.this,"通信に失敗しました。",Toast.LENGTH_SHORT).show();
                     }
-                }){
-
-            //送信するデータを設定
-            @Override
-            protected Map<String,String> getParams(){
-
-                //今回は[FastText：名前]と[SecondText：内容]を設定
-                Map<String,String> params = new HashMap<String,String>();
-                //params.put("FastText",name.getText().toString());
-                //params.put("SecondText",text.getText().toString());
-                params.put("select","select * from menu2");
-                //params.put("test","userid,password");
-                return params;
-            }
-        };
+                }
+        );
 
         getQueue.add(mRequest);
     }
