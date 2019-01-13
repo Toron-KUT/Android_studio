@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.toron.marunakadeokaimono_test">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -42,7 +42,10 @@
                 android:value="com.toron.marunakadeokaimono_test.MainActivity" />
         </activity>
         <activity android:name=".AuthenticationUserActivity" />
-        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".HomeActivity" />
+        <activity
+            android:name=".PurchaseHistroryActivity"
+            android:label="@string/title_activity_purchase_histrory"></activity>
     </application>
 
 </manifest>

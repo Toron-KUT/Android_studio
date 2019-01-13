@@ -12,8 +12,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -119,7 +122,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         RequestQueue postQueue = Volley.newRequestQueue(c);
 
         //サーバーのアドレス任意
-        String POST_URL="http://172.21.48.131/.php";
+        String POST_URL="http://172.21.48.131/test/SDataPostPHP2.php";
 
         StringRequest stringReq=new StringRequest(Request.Method.POST,POST_URL,
 
@@ -147,12 +150,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Map<String,String> params = new HashMap<String,String>();
                 //params.put("FastText",name.getText().toString());
                 //params.put("SecondText",text.getText().toString());
-                params.put("testtext","aaaa");
+                params.put("select","select * from test2");
+                params.put("test","userid,password");
                 return params;
             }
         };
 
         postQueue.add(stringReq);
+    }
+    public void readVolly(Context c){
+        //サーバーのアドレス任意
+        String GET_URL="サーバーのURL.read.php";
+
+        //queue
+        RequestQueue getQueue=Volley.newRequestQueue(c);
+
+
+        JsonObjectRequest mRequest = new JsonObjectRequest(Request.Method.GET,GET_URL,
+
+                // 通信成功
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        //リストを更新する
+                        //ChangeListView(response);
+                        Log.d("debug","通信に成功しました");
+                    }
+                },
+
+                // 通信失敗
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("debug","通信失敗");
+                        //Toast.makeText(MainActivity.this,"通信に失敗しました。",Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+
+        getQueue.add(mRequest);
     }
 
     public boolean CheckAuthenticationUser(Map<String,Object> mAuthenticationData){

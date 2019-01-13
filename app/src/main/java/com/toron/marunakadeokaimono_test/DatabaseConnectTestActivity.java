@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.concurrent.ExecutionException;
+
 public class DatabaseConnectTestActivity extends AppCompatActivity {
 
     private TextView textView;
@@ -140,7 +142,18 @@ public class DatabaseConnectTestActivity extends AppCompatActivity {
 
 
     }
-    public void phpconnectiontest(){
-        helper.startVolley(this);
+    public void phpconnectiontest(View v){
+        try {
+            if (helper == null) {
+                helper = new DatabaseHelper(getApplicationContext());
+            }
+            if (db == null) {
+                db = helper.getWritableDatabase();
+
+            }
+            helper.startVolley(this);
+        }catch(NullPointerException e){
+            Log.d("debug","out!!");
+        }
     }
 }
