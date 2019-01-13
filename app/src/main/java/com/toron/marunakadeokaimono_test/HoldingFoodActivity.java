@@ -105,8 +105,8 @@ public class HoldingFoodActivity extends AppCompatActivity {
 
             }
             mHoldingFoodData_Product_Name.setText(sbuilder_Product_Name.toString());
-            //mHoldingFoodData_Num.setText(sbuilder_Num.toString());
-            //mHoldingFoodData_CreateDate.setText(sbuilder_CreateDate.toString());
+            mHoldingFoodData_Num.setText(sbuilder_Num.toString());
+            mHoldingFoodData_CreateDate.setText(sbuilder_CreateDate.toString());
 
             Log.d("debug","mHoldingFoodList.size=" + mHoldingFoodList.size());
 

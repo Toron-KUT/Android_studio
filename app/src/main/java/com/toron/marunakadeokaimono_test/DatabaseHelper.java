@@ -60,8 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     _ID + " INTEGER PRIMARY KEY," +
                     "product_name" + " TEXT," +
                     "num"+ " INTEGER," +
-                    "createDate"+ " NUMERIC," +
-                    "updateDate"+ " NUMERIC)";
+                    "createDate"+ " NUMERIC)";
 
     //履歴テーブルを作成
     private static final String SQL_CREATE_HISTORY =
@@ -70,16 +69,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     "product_name"+ " TEXT,"+
                     "num"+ " INTEGER," +
                     "price"+ " INTEGER," +
-                    "createDate"+ " NUMERIC," +
-                    "updateDate"+ " NUMERIC)";
+                    "createDate"+ " NUMERIC)";
 
     //店テーブルを作成
     private static final String SQL_CREATE_STORES =
             "CREATE TABLE " + "stores" + " (" +
                     _ID + " INTEGER PRIMARY KEY," +
-                    "store_name" + " TEXT," +
-                    "createDate"+ " NUMERIC," +
-                    "updateDate"+ " NUMERIC)";
+                    "store_name" + " TEXT)";
     //テーブル削除文の発行
 
     private static final String SQL_DELETE_ENTRIES =
