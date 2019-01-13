@@ -13,10 +13,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Map;
 
 public class HoldingFoodActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+    private TextView mHoldingFoodData_Product_Name;
+    private TextView mHoldingFoodData_Num;
+    private TextView mHoldingFoodData_CreateDate;
     private DatabaseHelper helper;
     private SQLiteDatabase db;
 
@@ -53,12 +57,13 @@ public class HoldingFoodActivity extends AppCompatActivity {
         readButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowHoldingFoodData();
+                GetHoldingFoodData();
+
             }
         });
     }
 
-    private void ShowHoldingFoodData(){
+    private void GetHoldingFoodData(){
         try{
             if (helper == null) {
                 helper = new DatabaseHelper(getApplicationContext());
@@ -67,9 +72,10 @@ public class HoldingFoodActivity extends AppCompatActivity {
                 db = helper.getReadableDatabase();
 
             }
-            List<Object> HoldList = helper.GetHoldingFoodData(db);
+            List<Map<String,Object>> HoldList = helper.GetHoldingFoodData(db);
             if(HoldList!=null){
                 Log.d("debug","HoldList success");
+                DisplayHoldingFood(HoldList);
             }
             else{
                 Log.d("debug","Holdlist failed");
@@ -77,6 +83,23 @@ public class HoldingFoodActivity extends AppCompatActivity {
 
         }catch(NullPointerException e){
             Log.d("debug"," null poirnt exception " + e.getMessage());
+        }
+    }
+    private void DisplayHoldingFood(List<Map<String,Object>> mHoldingFoodList){
+        try{
+            mHoldingFoodData_Product_Name = findViewById(R.id.textView21);
+            mHoldingFoodData_Num = findViewById(R.id.textView22);
+            mHoldingFoodData_CreateDate = findViewById(R.id.textView23);
+            for(int i = 0;i < mHoldingFoodList.size();i++) {
+                Map<String, Object> mFoodData = mHoldingFoodList.get(i);
+                mHoldingFoodData_Product_Name.setText(mFoodData.get("product_name").toString());
+                mHoldingFoodData_Num.setText(mFoodData.get("num").toString());
+                mHoldingFoodData_CreateDate.setText(mFoodData.get("product_name").toString());
+            }
+            Log.d("debug","mHoldingFoodList.size=" + mHoldingFoodList.size());
+
+        }catch(NullPointerException e){
+            Log.d("debug","DisplayHoldingFood null poirnt exception " + e.getMessage());
         }
     }
 

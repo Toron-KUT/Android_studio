@@ -8,7 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     // データーベースのバージョン
@@ -99,8 +101,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Log.d("debug", "all table delete sccess");
         }
     }
-    public  List<Object> GetHoldingFoodData(SQLiteDatabase db){
-        List<Object>HoldList = new ArrayList<Object>();
+    public  List<Map<String,Object>> GetHoldingFoodData(SQLiteDatabase db){
+        List<Map<String,Object>>HoldList = new ArrayList<Map<String,Object>>();
+        Map<String,Object> mFoodData;
         Cursor c = null;
         int f = 0;
         try{
@@ -112,9 +115,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     int mNum = c.getInt(c.getColumnIndex("num"));
                     double mCreateDate = c.getDouble(c.getColumnIndex("createDate"));
 
-                    HoldList.add(mProduct_Name);
-                    HoldList.add(mNum);
-                    HoldList.add(mCreateDate);
+                    mFoodData = new HashMap<String,Object>();
+                    mFoodData.put("product_name",mProduct_Name);
+                    mFoodData.put("num",mNum);
+                    mFoodData.put("createdate",mCreateDate);
+
+
+                    HoldList.add(mFoodData);
+
                     f++;
 
                 }
@@ -130,6 +138,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         }catch(SQLiteException e){
             Log.d("debug","get holdtable data failed" + e.getMessage());
+        }finally{
+            c.close();
         }
         return HoldList;
 
