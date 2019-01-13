@@ -160,13 +160,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     public void readVolly(Context c){
         //サーバーのアドレス任意
-        String GET_URL="サーバーのURL.read.php";
+        String POST_URL="http://172.21.48.131/test/SDataPostPHP3.php";
 
         //queue
         RequestQueue getQueue=Volley.newRequestQueue(c);
 
 
-        JsonObjectRequest mRequest = new JsonObjectRequest(Request.Method.GET,GET_URL,
+        JsonObjectRequest mRequest = new JsonObjectRequest(Request.Method.POST,POST_URL,
 
                 // 通信成功
                 new Response.Listener<JSONObject>() {
@@ -185,8 +185,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         Log.d("debug","通信失敗");
                         //Toast.makeText(MainActivity.this,"通信に失敗しました。",Toast.LENGTH_SHORT).show();
                     }
-                }
-        );
+                }){
+
+            //送信するデータを設定
+            @Override
+            protected Map<String,String> getParams(){
+
+                //今回は[FastText：名前]と[SecondText：内容]を設定
+                Map<String,String> params = new HashMap<String,String>();
+                //params.put("FastText",name.getText().toString());
+                //params.put("SecondText",text.getText().toString());
+                params.put("select","select * from menu2");
+                //params.put("test","userid,password");
+                return params;
+            }
+        };
 
         getQueue.add(mRequest);
     }
