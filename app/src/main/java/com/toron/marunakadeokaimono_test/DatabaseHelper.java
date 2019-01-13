@@ -97,6 +97,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Log.d("debug", "all table delete sccess");
         }
     }
+    public boolean CheckAuthenticationUser(Map<String,Object> mAuthenticationData){
+        try{
+            //デバッグ
+            // 用にローカルデータベースから接続
+
+            return true;
+
+        }catch(NullPointerException e){
+            Log.d("debug","nullpointerException for AuthenticationUser" +e.getMessage());
+            return false;
+        }
+
+    }
     public  List<Map<String,Object>> GetHoldingFoodData(SQLiteDatabase db){
         List<Map<String,Object>>HoldList = new ArrayList<Map<String,Object>>();
         Map<String,Object> mFoodData;

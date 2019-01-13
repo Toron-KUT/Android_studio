@@ -39,6 +39,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.toron.marunakadeokaimono_test.MainActivity" />
         </activity>
+        <activity android:name=".AuthenticationUserActivity" />
+        <activity android:name=".HomeActivity"></activity>
     </application>
 
 </manifest>
