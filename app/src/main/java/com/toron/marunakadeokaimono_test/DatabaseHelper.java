@@ -136,10 +136,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     public void onResponse(String s) {
                         try{
                             Log.d("degug","通信に成功しました");
-                            JSONObject mJSONObject = new JSONObject(s);
-                            String title = mJSONObject.getJSONObject("0").getString("userid");
+                            JSONArray mJSONArray = new JSONArray(s);
+                            //JSONArray result = mJSONArray.getJSONArray(0);
+                            //JSONArray userList = result.getJSONArray(1);
+                            //JSONArray mJSONArray = new JSONArray(s);
+                            String title = mJSONArray.getJSONObject(0).getString("userid");
 
-                            Log.d("debug", "aaaaa" + title.toString() );
+                            Log.d("debug", "userlist + :  title:  "+ title);
                             //if (mJSONArray[0]["userid"] =="eat") {
                             //    Log.d("debug","万歳太郎");
                             //}
