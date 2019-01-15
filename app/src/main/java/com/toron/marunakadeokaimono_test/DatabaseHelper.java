@@ -141,8 +141,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                             //JSONArray userList = result.getJSONArray(1);
                             //JSONArray mJSONArray = new JSONArray(s);
                             String title = mJSONArray.getJSONObject(0).getString("userid");
+                            String title2 = mJSONArray.getJSONObject(0).getString("password");
 
-                            Log.d("debug", "userlist + :  title:  "+ title);
+                            Log.d("debug", "userid:     "+ title + " :  password   :  " +  title2  );
                             //if (mJSONArray[0]["userid"] =="eat") {
                             //    Log.d("debug","万歳太郎");
                             //}
