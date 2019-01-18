@@ -128,8 +128,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         postQueue.start();
 
         //サーバーのアドレス任意
-        //"http://172.21.48.131/test/SDataPostPHP3.php";
-        String POST_URL="http://172.21.48.131/test/" + PHPURL;
+
+        //テスト用に以下を止める．本来は以下の表現で行う
+        //String POST_URL="http://172.21.48.131/test/" + PHPURL;
+
+        String POST_URL = PHPURL;
 
         StringRequest stringReq=new StringRequest(Request.Method.GET,POST_URL,
 
@@ -144,10 +147,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                             //JSONArray result = mJSONArray.getJSONArray(0);
                             //JSONArray userList = result.getJSONArray(1);
                             //JSONArray mJSONArray = new JSONArray(s);
-                            String title = mJSONArray.getJSONObject(0).getString("userid");
-                            String title2 = mJSONArray.getJSONObject(0).getString("password");
-
-                            Log.d("debug", "userid:     "+ title + " :  password   :  " +  title2  );
+                            //String title = mJSONArray.getJSONObject(0).getString("userid");
+                            //String title2 = mJSONArray.getJSONObject(0).getString("password");
+                            //Log.d("debug", "userid:     "+ title + " :  password   :  " +  title2  );
+                            Log.d("debug","StartVolley Success");
                             //if (mJSONArray[0]["userid"] =="eat") {
                             //    Log.d("debug","万歳太郎");
                             //}
@@ -166,7 +169,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new Response.ErrorListener(){
                     @Override
                     public void onErrorResponse(VolleyError error){
-                        Log.d("degug","通信に失敗しました");
+                        Log.d("degug","通信に失敗しました" + error.getMessage());
                     }
                 });
 
@@ -240,7 +243,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<Map<String,Object>> mPurchaseHistoryList = new ArrayList<Map<String,Object>>();
         Map<String,Object> mPurchaseHistory;
         DatabaseHelper mHelper = this;
-        String mPHPURL = "SDataPostPHP3.php";
+        String mPHPURL = "http://172.21.48.131/test/SDataPostPHP3.php";
 
         int f = 0;
         try{
@@ -288,7 +291,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<Map<String,Object>> mSpecialSaleList = new ArrayList<Map<String,Object>>();
         Map<String,Object> mSpecialSale;
         DatabaseHelper mHelper = helper;
-        String mPHPURL = "http://172.21.48.131/test/SDataPostPHP3.php";
+        String mPHPURL = "http://localhost/server_php/Toron_BackEnd/php/getStore.php";
         
         int f = 0;
         try{
@@ -296,14 +299,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             if(mJSONArray.length()!= 0){
                 do{
                     JSONObject mJSONObject = mJSONArray.getJSONObject(f);
-                    String mProduct_Name = mJSONObject.getString("name");
-                    int mPrice = mJSONObject.getInt("price");
-                    double mCategory_Id = mJSONObject.getInt("category_id");
+                    String mStore_Name = mJSONObject.getString("name");
+
 
                     mSpecialSale = new HashMap<String,Object>();
-                    mSpecialSale.put("name",mProduct_Name);
-                    mSpecialSale.put("num",mPrice);
-                    mSpecialSale.put("category_id",mCategory_Id);
+                    mSpecialSale.put("name",mStore_Name);
 
                     mSpecialSaleList.add(mSpecialSale);
 
