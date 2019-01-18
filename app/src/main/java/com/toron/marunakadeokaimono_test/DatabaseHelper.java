@@ -240,7 +240,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<Map<String,Object>> mPurchaseHistoryList = new ArrayList<Map<String,Object>>();
         Map<String,Object> mPurchaseHistory;
         DatabaseHelper mHelper = this;
-        String mPHPURL = "http://172.21.48.131/test/SDataPostPHP3.php";
+        String mPHPURL = "SDataPostPHP3.php";
 
         int f = 0;
         try{

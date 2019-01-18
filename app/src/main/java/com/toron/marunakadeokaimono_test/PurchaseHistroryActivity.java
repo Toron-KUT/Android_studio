@@ -98,6 +98,7 @@ public class PurchaseHistroryActivity extends AppCompatActivity {
                 mPurchaseHistoryData_Password.append(mFoodData.get("password").toString() + "\n");
 
                 Log.d("debug","i= " + i);
+                Log.d("debug"," mPurchaseHistoryData_User_ID  ==" + sbuilder_User_ID.toString());
 
 
             }
