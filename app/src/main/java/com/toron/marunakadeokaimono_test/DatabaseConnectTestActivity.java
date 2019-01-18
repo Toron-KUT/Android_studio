@@ -170,4 +170,6 @@ public class DatabaseConnectTestActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PurchaseHistroryActivity.class);
         startActivity(intent);
     }
+
+
 }

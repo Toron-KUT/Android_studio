@@ -79,7 +79,7 @@ public class PurchaseHistroryActivity extends AppCompatActivity {
             }
 
         }catch(NullPointerException e){
-            Log.d("debug"," null poirnt exception " + e.getMessage());
+            Log.d("debug"," null poirnt exception in GetPurchaceHistoryData for RurchaceHistoryActivity" + e.getMessage());
         }
     }
     private void DisplayPurchaseHistory(List<Map<String,Object>> mPurchaseHistoryList){
@@ -92,10 +92,10 @@ public class PurchaseHistroryActivity extends AppCompatActivity {
 
 
             for(int i = 0;i < mPurchaseHistoryList.size();i++) {
-                Map<String, Object> mFoodData = mPurchaseHistoryList.get(i);
+                Map<String, Object> mPurchaseHistory = mPurchaseHistoryList.get(i);
 
-                mPurchaseHistoryData_User_ID.append(mFoodData.get("userid").toString() + "\n");
-                mPurchaseHistoryData_Password.append(mFoodData.get("password").toString() + "\n");
+                sbuilder_User_ID.append(mPurchaseHistory.get("userid").toString() + "\n");
+                sbuilder_Password.append(mPurchaseHistory.get("password").toString() + "\n");
 
                 Log.d("debug","i= " + i);
                 Log.d("debug"," mPurchaseHistoryData_User_ID  ==" + sbuilder_User_ID.toString());

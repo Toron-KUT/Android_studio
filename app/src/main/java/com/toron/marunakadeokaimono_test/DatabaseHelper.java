@@ -250,6 +250,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 do{
                     JSONObject mJSONObject = mJSONArray.getJSONObject(f);
                     String mUser_Id = mJSONObject.getString("userid");
+                    Log.d("debug","GetPurchaceHistory Data userID for databaseHelper == " + mUser_Id);
 
                     String mPassword = mJSONObject.getString("password");
 
@@ -258,6 +259,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     mPurchaseHistory.put("password",mPassword);
 
                     mPurchaseHistoryList.add(mPurchaseHistory);
+                    Map<String, Object> mPurchaseHistoryData = mPurchaseHistoryList.get(f);
+                    Log.d("debug","debug get code on Arraylist for databasehelper  == " +  mPurchaseHistoryData.get("userid").toString());
 
                     f++;
                 }while(f<mJSONArray.length());
@@ -273,8 +276,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } catch (JSONException e) {
             e.printStackTrace();
         } finally{
-            return mPurchaseHistoryList;
+
         }
+        return mPurchaseHistoryList;
 
 
 
