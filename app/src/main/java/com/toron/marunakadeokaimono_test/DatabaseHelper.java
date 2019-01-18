@@ -47,6 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static String COLUMN_NAME_POINTS = "points";
 
     private RequestQueue mQueue;
+    private JSONArray mArrayList;
 
     //テーブル作成文の発行
     private static final String SQL_CREATE_ENTRIES =
@@ -117,9 +118,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void startVolley(Context c) {
+    public JSONArray startVolley(Context c) {
 
         //queue
+
 
         RequestQueue postQueue = Volley.newRequestQueue(c);
         postQueue.stop();
@@ -137,6 +139,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         try{
                             Log.d("degug","通信に成功しました");
                             JSONArray mJSONArray = new JSONArray(s);
+                            this.setArrayList(mJSONArray);
                             //JSONArray result = mJSONArray.getJSONArray(0);
                             //JSONArray userList = result.getJSONArray(1);
                             //JSONArray mJSONArray = new JSONArray(s);
@@ -152,6 +155,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         }
 
                     }
+
+                    private void setArrayList(JSONArray mJSONArray) {
+                        mArrayList = mJSONArray;
+                    }
                 },
 
                 //通信失敗
@@ -163,6 +170,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 });
 
         postQueue.add(stringReq);
+        return mArrayList;
     }
 
     public void readVolly(Context c){

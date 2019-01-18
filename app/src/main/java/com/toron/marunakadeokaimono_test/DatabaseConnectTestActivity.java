@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.concurrent.ExecutionException;
 
 public class DatabaseConnectTestActivity extends AppCompatActivity {
@@ -151,10 +154,14 @@ public class DatabaseConnectTestActivity extends AppCompatActivity {
                 db = helper.getWritableDatabase();
 
             }
-            helper.startVolley(this);
+            JSONArray mJSONArray = helper.startVolley(this);
+            String title = mJSONArray.getJSONObject(0).getString("userid");
+            Log.d("debug","DatabaseConnect Test  tile =  " + title);
             //helper.readVolly(this);
         }catch(NullPointerException e){
             Log.d("debug","out!!");
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }
