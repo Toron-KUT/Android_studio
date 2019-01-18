@@ -118,7 +118,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public JSONArray startVolley(Context c) {
+    public JSONArray StartVolley(String PHPURL,Context c) {
 
         //queue
 
@@ -128,7 +128,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         postQueue.start();
 
         //サーバーのアドレス任意
-        String POST_URL="http://172.21.48.131/test/SDataPostPHP3.php";
+        //"http://172.21.48.131/test/SDataPostPHP3.php";
+        String POST_URL="http://172.21.48.131/test/" + PHPURL;
 
         StringRequest stringReq=new StringRequest(Request.Method.GET,POST_URL,
 
@@ -173,36 +174,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return mArrayList;
     }
 
-    public void readVolly(Context c){
-        //queue
-        RequestQueue getQueue=Volley.newRequestQueue(c);
-        //サーバーのアドレス任意
-        String POST_URL="http://172.21.48.131/test/SDataPostPHP3.php";
 
-        JsonObjectRequest mRequest = new JsonObjectRequest(Request.Method.GET,POST_URL,
-
-                // 通信成功
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        //リストを更新する
-                        //ChangeListView(response);
-                        Log.d("debug","通信に成功しました");
-                    }
-                },
-
-                // 通信失敗
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("debug", "通信失敗" + error.getMessage());
-                        //Toast.makeText(MainActivity.this,"通信に失敗しました。",Toast.LENGTH_SHORT).show();
-                    }
-                }
-        );
-
-        getQueue.add(mRequest);
-    }
 
     public boolean CheckAuthenticationUser(Map<String,Object> mAuthenticationData){
         try{
@@ -259,6 +231,95 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             c.close();
         }
         return HoldList;
+
+
+
+    }
+
+    public  List<Map<String,Object>> GetPurchaseHistoryData(Context c){
+        List<Map<String,Object>> mPurchaseHistoryList = new ArrayList<Map<String,Object>>();
+        Map<String,Object> mPurchaseHistory;
+        DatabaseHelper mHelper = this;
+        String mPHPURL = "http://172.21.48.131/test/SDataPostPHP3.php";
+
+        int f = 0;
+        try{
+            //テスト用
+            JSONArray mJSONArray = mHelper.StartVolley(mPHPURL,c);
+            if(mJSONArray.length()!= 0){
+                do{
+                    JSONObject mJSONObject = mJSONArray.getJSONObject(f);
+                    String mUser_Id = mJSONObject.getString("userid");
+
+                    String mPassword = mJSONObject.getString("password");
+
+                    mPurchaseHistory = new HashMap<String,Object>();
+                    mPurchaseHistory.put("userid",mUser_Id);
+                    mPurchaseHistory.put("password",mPassword);
+
+                    mPurchaseHistoryList.add(mPurchaseHistory);
+
+                    f++;
+                }while(f<mJSONArray.length());
+                Log.d("debug","test data set finish");
+            }
+            else{
+                Log.d("debug","テストデータがありませんでした");
+                return null;
+            }
+
+        }catch(SQLiteException e){
+            Log.d("debug","get test data failed" + e.getMessage());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } finally{
+            return mPurchaseHistoryList;
+        }
+
+
+
+
+    }
+    public  List<Map<String,Object>> GetSpecialSaleData(DatabaseHelper helper,  Context c){
+        List<Map<String,Object>> mSpecialSaleList = new ArrayList<Map<String,Object>>();
+        Map<String,Object> mSpecialSale;
+        DatabaseHelper mHelper = helper;
+        String mPHPURL = "http://172.21.48.131/test/SDataPostPHP3.php";
+        
+        int f = 0;
+        try{
+            JSONArray mJSONArray = mHelper.StartVolley(mPHPURL,c);
+            if(mJSONArray.length()!= 0){
+                do{
+                    JSONObject mJSONObject = mJSONArray.getJSONObject(f);
+                    String mProduct_Name = mJSONObject.getString("name");
+                    int mPrice = mJSONObject.getInt("price");
+                    double mCategory_Id = mJSONObject.getInt("category_id");
+
+                    mSpecialSale = new HashMap<String,Object>();
+                    mSpecialSale.put("name",mProduct_Name);
+                    mSpecialSale.put("num",mPrice);
+                    mSpecialSale.put("category_id",mCategory_Id);
+
+                    mSpecialSaleList.add(mSpecialSale);
+
+                    f++;
+                }while(f<mJSONArray.length());
+                Log.d("debug","special sale data set finish");
+            }
+            else{
+                Log.d("debug","特売情報がありませんでした");
+                return null;
+            }
+
+        }catch(SQLiteException e){
+            Log.d("debug","get specialfood data failed" + e.getMessage());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } finally{
+            return mSpecialSaleList;
+        }
+
 
 
 

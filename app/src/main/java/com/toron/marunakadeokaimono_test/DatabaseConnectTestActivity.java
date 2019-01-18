@@ -154,7 +154,7 @@ public class DatabaseConnectTestActivity extends AppCompatActivity {
                 db = helper.getWritableDatabase();
 
             }
-            JSONArray mJSONArray = helper.startVolley(this);
+            JSONArray mJSONArray = helper.StartVolley("SDataPostPHP3.php",this);
             String title = mJSONArray.getJSONObject(0).getString("userid");
             Log.d("debug","DatabaseConnect Test  tile =  " + title);
             //helper.readVolly(this);

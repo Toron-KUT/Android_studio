@@ -1,17 +1,26 @@
 package com.toron.marunakadeokaimono_test;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.List;
+import java.util.Map;
+
 public class PurchaseHistroryActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+    private TextView mPurchaseHistoryData_User_ID;
+    private TextView mPurchaseHistoryData_Password;
+    private DatabaseHelper helper;
+    private SQLiteDatabase db;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -51,11 +60,54 @@ public class PurchaseHistroryActivity extends AppCompatActivity {
         });
     }
 
-    private void GetPurchaseHistoryData() {
+    private void GetPurchaseHistoryData(){
         try{
+            if (helper == null) {
+                helper = new DatabaseHelper(getApplicationContext());
+            }
+            if (db == null) {
+                db = helper.getReadableDatabase();
+
+            }
+            List<Map<String,Object>> mPurchaseHistory = helper.GetPurchaseHistoryData(this);
+            if(mPurchaseHistory!=null){
+                Log.d("debug","Test購入履歴 success");
+                DisplayPurchaseHistory(mPurchaseHistory);
+            }
+            else{
+                Log.d("debug","Tset購入履歴 failed");
+            }
 
         }catch(NullPointerException e){
+            Log.d("debug"," null poirnt exception " + e.getMessage());
+        }
+    }
+    private void DisplayPurchaseHistory(List<Map<String,Object>> mPurchaseHistoryList){
+        try{
+            mPurchaseHistoryData_User_ID = findViewById(R.id.textView30);
+            mPurchaseHistoryData_Password = findViewById(R.id.textView32);
 
+            StringBuilder sbuilder_User_ID = new StringBuilder();
+            StringBuilder sbuilder_Password = new StringBuilder();
+
+
+            for(int i = 0;i < mPurchaseHistoryList.size();i++) {
+                Map<String, Object> mFoodData = mPurchaseHistoryList.get(i);
+
+                mPurchaseHistoryData_User_ID.append(mFoodData.get("userid").toString() + "\n");
+                mPurchaseHistoryData_Password.append(mFoodData.get("password").toString() + "\n");
+
+                Log.d("debug","i= " + i);
+
+
+            }
+            mPurchaseHistoryData_User_ID.setText(sbuilder_User_ID.toString());
+            mPurchaseHistoryData_Password.setText(sbuilder_Password.toString());
+
+            Log.d("debug","mPurchaseHistory.size=" + mPurchaseHistoryList.size());
+
+        }catch(NullPointerException e){
+            Log.d("debug","Display PurchaseHistory null poirnt exception " + e.getMessage());
         }
     }
 
