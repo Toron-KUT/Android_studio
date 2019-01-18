@@ -1,5 +1,6 @@
 package com.toron.marunakadeokaimono_test;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -110,6 +111,11 @@ public class PurchaseHistroryActivity extends AppCompatActivity {
         }catch(NullPointerException e){
             Log.d("debug","Display PurchaseHistory null poirnt exception " + e.getMessage());
         }
+    }
+
+    public void goSpecialSale(View view){
+        Intent intent = new Intent(this, SpecialSaleActivity.class);
+        startActivity(intent);
     }
 
 }

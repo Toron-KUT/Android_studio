@@ -50,14 +50,14 @@ public class SpecialSaleActivity extends AppCompatActivity {
             }
 
         }catch(NullPointerException e){
-            Log.d("debug"," null poirnt exception " + e.getMessage());
+            Log.d("debug"," null poirnt exception for GetSpecialSaleData" + e.getMessage());
         }
 
     }
 
     private void DisplaySpecialSale(List<Map<String,Object>> mSpecialSaleList){
         try{
-            mSpecialSaleData_Store_Name = findViewById(R.id.textView21);
+            mSpecialSaleData_Store_Name = findViewById(R.id.textView34);
 
             StringBuilder sbuilder_Store_Name = new StringBuilder();
 
@@ -65,7 +65,7 @@ public class SpecialSaleActivity extends AppCompatActivity {
             for(int i = 0;i < mSpecialSaleList.size();i++) {
                 Map<String, Object> mFoodData = mSpecialSaleList.get(i);
 
-                sbuilder_Store_Name.append(mFoodData.get("product_name").toString() + "\n");
+                sbuilder_Store_Name.append(mFoodData.get("name").toString() + "\n");
 
                 Log.d("debug","i= " + i);
             }
@@ -75,7 +75,7 @@ public class SpecialSaleActivity extends AppCompatActivity {
             Log.d("debug","mSpecialSaleList.size=" + mSpecialSaleList.size());
 
         } catch(NullPointerException e) {
-                Log.d("debug","DisplaySpecialSale null poirnt exception " + e.getMessage());
+                Log.d("debug"," null poirnt exception for DisplaySpecialSale " + e.getMessage());
         }
     }
 }
