@@ -1,6 +1,7 @@
 package com.toron.marunakadeokaimono_test;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -163,5 +164,10 @@ public class DatabaseConnectTestActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void goHistory(View view){
+        Intent intent = new Intent(this, PurchaseHistroryActivity.class);
+        startActivity(intent);
     }
 }
