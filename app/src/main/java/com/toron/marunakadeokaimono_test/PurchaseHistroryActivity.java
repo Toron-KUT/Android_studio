@@ -61,8 +61,8 @@ public class PurchaseHistroryActivity extends AppCompatActivity {
         });
     }
 
-    private void GetPurchaseHistoryData(){
-        try{
+    private void GetPurchaseHistoryData() {
+        try {
             if (helper == null) {
                 helper = new DatabaseHelper(getApplicationContext());
             }
@@ -70,21 +70,27 @@ public class PurchaseHistroryActivity extends AppCompatActivity {
                 db = helper.getReadableDatabase();
 
             }
-            List<Map<String,Object>> mPurchaseHistory = helper.GetPurchaseHistoryData(this);
-            if(mPurchaseHistory!=null){
-                Log.d("debug","Test購入履歴 success");
+            Log.d("debug", "test for PurchaseHistory before");
+
+
+            List<Map<String, Object>> mPurchaseHistory = helper.GetPurchaseHistoryData(this);
+            Log.d("debug", "test for PurchaseHistory after");
+
+
+            if (mPurchaseHistory != null) {
+                Log.d("debug", "Test購入履歴 success");
                 DisplayPurchaseHistory(mPurchaseHistory);
-            }
-            else{
-                Log.d("debug","Tset購入履歴 failed");
+            } else {
+                Log.d("debug", "Tset購入履歴 failed");
             }
 
-        }catch(NullPointerException e){
-            Log.d("debug"," null poirnt exception in GetPurchaceHistoryData for RurchaceHistoryActivity" + e.getMessage());
+        } catch (NullPointerException e) {
+            Log.d("debug", " null poirnt exception in GetPurchaceHistoryData for RurchaceHistoryActivity " + e.getMessage());
         }
     }
-    private void DisplayPurchaseHistory(List<Map<String,Object>> mPurchaseHistoryList){
-        try{
+
+    private void DisplayPurchaseHistory(List<Map<String, Object>> mPurchaseHistoryList) {
+        try {
             mPurchaseHistoryData_User_ID = findViewById(R.id.textView30);
             mPurchaseHistoryData_Password = findViewById(R.id.textView32);
 
@@ -92,30 +98,34 @@ public class PurchaseHistroryActivity extends AppCompatActivity {
             StringBuilder sbuilder_Password = new StringBuilder();
 
 
-            for(int i = 0;i < mPurchaseHistoryList.size();i++) {
+            for (int i = 0; i < mPurchaseHistoryList.size(); i++) {
                 Map<String, Object> mPurchaseHistory = mPurchaseHistoryList.get(i);
 
                 sbuilder_User_ID.append(mPurchaseHistory.get("userid").toString() + "\n");
                 sbuilder_Password.append(mPurchaseHistory.get("password").toString() + "\n");
 
-                Log.d("debug","i= " + i);
-                Log.d("debug"," mPurchaseHistoryData_User_ID  ==" + sbuilder_User_ID.toString());
+                Log.d("debug", "i= " + i);
+                Log.d("debug", " mPurchaseHistoryData_User_ID  ==" + sbuilder_User_ID.toString());
 
 
             }
             mPurchaseHistoryData_User_ID.setText(sbuilder_User_ID.toString());
             mPurchaseHistoryData_Password.setText(sbuilder_Password.toString());
 
-            Log.d("debug","mPurchaseHistory.size=" + mPurchaseHistoryList.size());
+            Log.d("debug", "mPurchaseHistory.size=" + mPurchaseHistoryList.size());
 
-        }catch(NullPointerException e){
-            Log.d("debug","Display PurchaseHistory null poirnt exception " + e.getMessage());
+        } catch (NullPointerException e) {
+            Log.d("debug", "Display PurchaseHistory null poirnt exception " + e.getMessage());
         }
     }
 
-    public void goSpecialSale(View view){
+    public void goSpecialSale(View view) {
         Intent intent = new Intent(this, SpecialSaleActivity.class);
         startActivity(intent);
     }
+
+    //onResponce(){
+
+    //}
 
 }

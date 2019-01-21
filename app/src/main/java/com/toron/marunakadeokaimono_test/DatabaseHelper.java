@@ -47,7 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static String COLUMN_NAME_POINTS = "points";
 
     private RequestQueue mQueue;
-    private JSONArray mArrayList;
+    private JSONArray mArrayList = null;
 
     //テーブル作成文の発行
     private static final String SQL_CREATE_ENTRIES =
@@ -118,14 +118,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    private JSONArray getJSONArray(){
+        return mArrayList;
+    }
+
     public JSONArray StartVolley(String PHPURL,Context c) {
+        Log.d("debug" , "StartVolley started....");
+        //mArrayList = null;
+
 
         //queue
 
 
         RequestQueue postQueue = Volley.newRequestQueue(c);
-        postQueue.stop();
-        postQueue.start();
+        //postQueue.stop();
+        //postQueue.start();
 
         //サーバーのアドレス任意
 
@@ -141,9 +148,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     @Override
                     public void onResponse(String s) {
                         try{
-                            Log.d("degug","通信に成功しました");
+                            Log.d("degug","通信に成功しました for ");
                             JSONArray mJSONArray = new JSONArray(s);
                             this.setArrayList(mJSONArray);
+
                             //JSONArray result = mJSONArray.getJSONArray(0);
                             //JSONArray userList = result.getJSONArray(1);
                             //JSONArray mJSONArray = new JSONArray(s);
@@ -151,6 +159,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                             //String title2 = mJSONArray.getJSONObject(0).getString("password");
                             //Log.d("debug", "userid:     "+ title + " :  password   :  " +  title2  );
                             Log.d("debug","StartVolley Success");
+
                             //if (mJSONArray[0]["userid"] =="eat") {
                             //    Log.d("debug","万歳太郎");
                             //}
@@ -174,7 +183,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 });
 
         postQueue.add(stringReq);
+        //while(mArrayList == null){
+        //    Log.d("debug","test for startvolley");
+        //}
         return mArrayList;
+
     }
 
     public JSONArray ReturnVolley(String PHPURL,Context c) {
@@ -211,6 +224,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                             //String title2 = mJSONArray.getJSONObject(0).getString("password");
                             //Log.d("debug", "userid:     "+ title + " :  password   :  " +  title2  );
                             Log.d("debug","StartVolley Success");
+
                             //if (mJSONArray[0]["userid"] =="eat") {
                             //    Log.d("debug","万歳太郎");
                             //}
@@ -221,7 +235,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     }
 
                     private void setArrayList(JSONArray mJSONArray) {
+
                         mArrayList = mJSONArray;
+
                     }
                 },
 
@@ -300,6 +316,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public  List<Map<String,Object>> GetPurchaseHistoryData(Context c){
+        Log.d("debug","GetPurchaseHistoryData for DatavaseHelper  startd...");
         List<Map<String,Object>> mPurchaseHistoryList = new ArrayList<Map<String,Object>>();
         Map<String,Object> mPurchaseHistory;
         DatabaseHelper mHelper = this;
@@ -309,9 +326,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         try{
             //テスト用
             JSONArray mJSONArray = mHelper.StartVolley(mPHPURL,c);
-            if(mJSONArray.length()!= 0){
+            JSONArray mmJSONArray = getJSONArray();
+
+            //while(true){
+            //    mmJSONArray = getJSONArray();
+            //    if(mmJSONArray != null)break;
+            //}
+
+
+
+            if(mmJSONArray.length()!= 0){
                 do{
-                    JSONObject mJSONObject = mJSONArray.getJSONObject(f);
+                    JSONObject mJSONObject = mmJSONArray.getJSONObject(f);
                     String mUser_Id = mJSONObject.getString("userid");
                     Log.d("debug","GetPurchaceHistory Data userID for databaseHelper == " + mUser_Id);
 
@@ -338,7 +364,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Log.d("debug","get test data failed" + e.getMessage());
         } catch (JSONException e) {
             e.printStackTrace();
-        } finally{
+        }catch(NullPointerException e){
+            Log.d("debug"," null poirnt exception in GetPurchaceHistoryData for DatabaseHelper " + e.getMessage());
+        }
+        finally{
 
         }
         return mPurchaseHistoryList;
@@ -347,15 +376,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     }
-    public  List<Map<String,Object>> GetSpecialSaleData(DatabaseHelper helper,  Context c){
+    public  List<Map<String,Object>> GetSpecialSaleData( JSONArray mJSONArray){
         List<Map<String,Object>> mSpecialSaleList = new ArrayList<Map<String,Object>>();
         Map<String,Object> mSpecialSale;
-        DatabaseHelper mHelper = helper;
-        String mPHPURL = "http://172.21.48.127/server_php/Toron_BackEnd/php/getStore.php";
-        
+        //DatabaseHelper mHelper = this;
+        //String mPHPURL = "http://172.21.48.127/server_php/Toron_BackEnd/php/getStore.php";
+
         int f = 0;
         try{
-            JSONArray mJSONArray = mHelper.ReturnVolley(mPHPURL,c);
+            //JSONArray mJSONArray = mHelper.ReturnVolley(mPHPURL,c);
             if(mJSONArray.length()!= 0){
                 do{
                     JSONObject mJSONObject = mJSONArray.getJSONObject(f);
