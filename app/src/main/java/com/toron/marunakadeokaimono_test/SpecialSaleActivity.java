@@ -72,6 +72,7 @@ public class SpecialSaleActivity extends AppCompatActivity {
                                 DisplaySpecialSale(mArrayList);
                                 //レスポンスが返ってきたらDisplaySpecialSale()を実行
 
+
                             }catch(JSONException e){
                                 Log.d("degug","JSONエラー" + e.getMessage());
                             }

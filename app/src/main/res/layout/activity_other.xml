@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OtherActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="32dp"
+        android:divider="@layout/divider"
+        android:dividerPadding="20dp"
+        android:orientation="vertical"
+        android:showDividers="middle"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/OtherButton1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/andoroid_100"
+            android:text="お気に入り店舗登録" />
+
+        <Button
+            android:id="@+id/OtherButton2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/andoroid_100"
+            android:text="パスワードのリセット" />
+
+        <Button
+            android:id="@+id/OtherButton3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/andoroid_100"
+            android:text="ログアウト" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
