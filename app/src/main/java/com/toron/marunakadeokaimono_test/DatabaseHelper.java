@@ -255,15 +255,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-    public boolean CheckAuthenticationUser(Map<String,Object> mAuthenticationData){
+    public boolean SetAuthenticationUserData(JSONArray mJSONArray ,SQLiteDatabase db){
         try{
             //デバッグ
             // 用にローカルデータベースから接続
+            DatabaseHelper helper =this;
+
+            Cursor cour = null;
+            int f = 0;
+           // cour = db.rawQuery("Insert into users values",null);
+            cour.close();
+
+
 
             return true;
 
+
+
+
         }catch(NullPointerException e){
-            Log.d("debug","nullpointerException for AuthenticationUser" +e.getMessage());
+            Log.d("debug","nullpointerException for AuthenticationUser  " +e.getMessage());
+            return false;
+        }catch(SQLiteException e){
+            Log.d("debug","SQLiteException for AuthenticationUser  " +e.getMessage());
             return false;
         }
 
@@ -372,10 +386,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return mPurchaseHistoryList;
 
-
-
-
     }
+
+
     public  List<Map<String,Object>> GetSpecialSaleData( JSONArray mJSONArray){
         List<Map<String,Object>> mSpecialSaleList = new ArrayList<Map<String,Object>>();
         Map<String,Object> mSpecialSale;
@@ -413,10 +426,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } finally{
             return mSpecialSaleList;
         }
-
-
-
-
     }
 
 
