@@ -1,5 +1,6 @@
 package com.toron.marunakadeokaimono_test;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -9,16 +10,46 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class FinishRegistrationUserActivity extends AppCompatActivity {
     private TextView textView;
     private DatabaseHelper helper;
     private SQLiteDatabase db;
+    private RequestQueue mQueue;
+    private  Map<String, String> params;
+    private String PHPURL = "http://172.21.48.127/server_php/Toron_BackEnd/php/insertNewUser.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finish_registration_user);
-        readData();
+        //readData();
+        Intent intent = getIntent();
+        //送信するデータを設定，格納
+        params = new HashMap<String, String>();
+        params.put("login_id",intent.getStringExtra("ID"));
+        params.put("password",intent.getStringExtra("PASS"));
+        params.put("name",intent.getStringExtra("USER"));
+        params.put("ruby",intent.getStringExtra("RUBY"));
+        params.put("waon",intent.getStringExtra("WAON"));
+        params.put("security",intent.getStringExtra("SECURE"));
+
+
+        InsertNewUserData(params);
     }
 
     private void readData() {
@@ -77,6 +108,98 @@ public class FinishRegistrationUserActivity extends AppCompatActivity {
 
         Log.d("debug","**********"+sbuilder.toString());
         textView.setText(sbuilder.toString());
+    }
+
+
+    private void InsertNewUserData(Map<String, String> mParams){
+        try{
+            if (helper == null) {
+                helper = new DatabaseHelper(getApplicationContext());
+            }
+            if (db == null) {
+                db = helper.getReadableDatabase();
+
+            }
+            //通信の発行
+            mQueue = Volley.newRequestQueue(this);
+            String POST_URL = PHPURL;
+            StringRequest stringReq=new StringRequest(Request.Method.POST,POST_URL,
+
+                    //通信成功
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String s) {
+                            try{
+
+                                String mString = s;
+                                Log.d("degug","通信に成功しました 　結果 == " + mString);
+                                
+                                if(mString.equals("true")){
+                                    Log.d("debug","ユーザー登録に成功しました");
+                                    String Message = "ユーザー情報を登録しました．";
+                                    DisplayFinishRegistration(Message);
+                                }
+                                else{
+                                    Log.d("debug","ユーザー登録に失敗しました");
+                                    String Message = "ユーザー登録に失敗しました．";
+                                    DisplayFinishRegistration(Message);
+                                }
+
+                                Log.d("debug","InsertUserData Volley Success");
+                                //List<Map<String,Object>> mArrayList = helper.GetSpecialSaleData(mJSONArray);
+                                //DisplaySpecialSale(mArrayList);
+                                //レスポンスが返ってきたらDisplaySpecialSale()を実行
+
+
+                            }catch(NullPointerException e){
+                                Log.d("degug","Nullpointエラー for FinishRegistrationUserActivity " + e.getMessage());
+                            }
+
+                        }
+                    },
+
+                    //通信失敗
+                    new Response.ErrorListener(){
+                        @Override
+                        public void onErrorResponse(VolleyError error){
+                            Log.d("degug","通信に失敗しました" + error.getMessage());
+                        }
+                    }) {
+
+                //送信するデータを設定
+                @Override
+                protected Map<String, String> getParams() {
+
+                    //今回は[FastText：名前]と[SecondText：内容]を設定
+
+                    return params;
+                }
+            };
+
+            mQueue.add(stringReq);
+            //リクエストキューを発行
+
+
+
+
+            //List<Map<String,Object>> SpecialSaleList = helper.GetSpecialSaleData(helper,this);
+            //if(SpecialSaleList!=null){
+            //    Log.d("debug","SpecialSaleList success");
+            //    DisplaySpecialSale(SpecialSaleList);
+            //}
+            //else{
+            //    Log.d("debug","SpecialSaleList failed");
+            //}
+
+        }catch(NullPointerException e){
+            Log.d("debug"," null poirnt exception for FinishRegistrationUserActivity" + e.getMessage());
+        }
+
+    }
+
+    private void DisplayFinishRegistration(String mMessage){
+        final TextView id = findViewById(R.id.FinishRegistrationUserTextView1);
+        id.setText(mMessage);
     }
 
 }

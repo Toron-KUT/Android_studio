@@ -3,4 +3,5 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="andoroid_100">100dp</dimen>
+    <dimen name="android_50">50dp</dimen>
 </resources>

@@ -4,23 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DisplayMessageActivity">
-
-   
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:text="以下の情報で登録します．よろしいですか？"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    
+    tools:context=".RegistrationUserActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,48 +16,59 @@
         android:showDividers="middle"
         app:layout_constraintTop_toBottomOf="@+id/textView35">
 
-        <TextView
-            android:id="@+id/DisplayMessageTextView1"
+        <EditText
+            android:id="@+id/RegistrationEditText1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/android_50"
             android:text="ログインID" />
 
-        <TextView
-            android:id="@+id/DisplayMessageTextView2"
+        <EditText
+            android:id="@+id/RegistrationEditText2"
             android:layout_width="match_parent"
             android:layout_height="@dimen/android_50"
             android:inputType="textPassword"
             android:text="aaaa" />
 
-        <TextView
-            android:id="@+id/DisplayMessageTextView3"
+        <EditText
+            android:id="@+id/RegistrationEditText3"
             android:layout_width="match_parent"
             android:layout_height="@dimen/android_50"
             android:text="氏名" />
 
-        <TextView
-            android:id="@+id/DisplayMessageTextView4"
+        <EditText
+            android:id="@+id/RegistrationEditText4"
             android:layout_width="match_parent"
             android:layout_height="@dimen/android_50"
             android:text="ルビ" />
 
-        <TextView
-            android:id="@+id/DisplayMessageTextView5"
+        <EditText
+            android:id="@+id/RegistrationEditText5"
             android:layout_width="match_parent"
             android:layout_height="@dimen/android_50"
             android:text="WAON番号" />
 
-        <TextView
-            android:id="@+id/DisplayMessageTextView6"
+        <EditText
+            android:id="@+id/RegistrationEditText6"
             android:layout_width="match_parent"
             android:layout_height="@dimen/android_50"
             android:text="セキュリティコード" />
 
         <Button
-            android:id="@+id/DisplayMessageButton1"
+            android:id="@+id/RegistrationButton1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="登録へ" />
+            android:text="次へ" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/textView35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:layout_marginTop="8dp"
+        android:text="ユーザー情報を入力してさい"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

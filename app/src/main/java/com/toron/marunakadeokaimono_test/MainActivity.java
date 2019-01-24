@@ -45,47 +45,47 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
     /** Called when the user taps the Send button */
-    public void sendMessage(View view) {
-        // Do something in response to button
-        //遷移先にデータを渡すやり方
-        //1 ****EditTextでどのフォームからかを特定
-        //2 ****Messageで文字列を取得
-        //3 文字列をIntentにputしていく
-        //遷移先はDisplayMessageActivity
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
 
-        EditText waonEditText = (EditText) findViewById(R.id.editText3);
-        String waonMessage = waonEditText.getText().toString();
-        intent.putExtra("WAON", waonMessage);
-
-        EditText secureEditText = (EditText) findViewById(R.id.editText4);
-        String secureMessage = secureEditText.getText().toString();
-        intent.putExtra("SECURE", secureMessage);
-
-        EditText idEditText = (EditText) findViewById(R.id.editText5);
-        String idMessage = idEditText.getText().toString();
-        intent.putExtra("ID", idMessage);
-
-        EditText passEditText = (EditText) findViewById(R.id.editText6);
-        String passMessage = passEditText.getText().toString();
-        intent.putExtra("PASS", passMessage);
-
-
-        EditText userEditText = (EditText) findViewById(R.id.editText7);
-        String userMessage = userEditText.getText().toString();
-        intent.putExtra("USER", userMessage);
-
-
-        startActivity(intent);
-
-    }
-    //テスト用転送
+    //テスト用転送 public void sendMessage(View view) {
+    //        // Do something in response to button
+    //        //遷移先にデータを渡すやり方
+    //        //1 ****EditTextでどのフォームからかを特定
+    //        //2 ****Messageで文字列を取得
+    //        //3 文字列をIntentにputしていく
+    //        //遷移先はDisplayMessageActivity
+    //        Intent intent = new Intent(this, DisplayMessageActivity.class);
+    //
+    //        EditText waonEditText = (EditText) findViewById(R.id.editText3);
+    //        String waonMessage = waonEditText.getText().toString();
+    //        intent.putExtra("WAON", waonMessage);
+    //
+    //        EditText secureEditText = (EditText) findViewById(R.id.editText4);
+    //        String secureMessage = secureEditText.getText().toString();
+    //        intent.putExtra("SECURE", secureMessage);
+    //
+    //        EditText idEditText = (EditText) findViewById(R.id.editText5);
+    //        String idMessage = idEditText.getText().toString();
+    //        intent.putExtra("ID", idMessage);
+    //
+    //        EditText passEditText = (EditText) findViewById(R.id.editText6);
+    //        String passMessage = passEditText.getText().toString();
+    //        intent.putExtra("PASS", passMessage);
+    //
+    //
+    //        EditText userEditText = (EditText) findViewById(R.id.editText7);
+    //        String userMessage = userEditText.getText().toString();
+    //        intent.putExtra("USER", userMessage);
+    //
+    //
+    //        startActivity(intent);
+    //
+    //    }
     public void gotest(View view){
         Intent intent = new Intent(this, DatabaseConnectTestActivity.class);
         startActivity(intent);
     }
-    public void goholding(View view){
-        Intent intent = new Intent(this, HoldingFoodActivity.class);
+    public void goregistration(View view){
+        Intent intent = new Intent(this, RegistrationUserActivity.class);
         startActivity(intent);
     }
 

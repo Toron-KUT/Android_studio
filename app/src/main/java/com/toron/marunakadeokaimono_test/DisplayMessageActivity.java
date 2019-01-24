@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class DisplayMessageActivity extends AppCompatActivity {
@@ -27,31 +28,37 @@ public class DisplayMessageActivity extends AppCompatActivity {
         final String idMessage   = intent.getStringExtra("ID");
         final String passMessage = intent.getStringExtra("PASS");
         final String userMessage   = intent.getStringExtra("USER");
+        final String rubyMessage = intent.getStringExtra("RUBY");
 
         // Capture the layout's TextView and set the string as its text
-        final TextView waon = findViewById(R.id.textView);
-        waon.setText(waonMessage);
 
-        final TextView secure = findViewById(R.id.textView2);
-        secure.setText(secureMessage);
 
-        final TextView id = findViewById(R.id.textView3);
+        final TextView id = findViewById(R.id.DisplayMessageTextView1);
         id.setText(idMessage);
 
-        final TextView pass = findViewById(R.id.textView4);
+        final TextView pass = findViewById(R.id.DisplayMessageTextView2);
         pass.setText(passMessage);
 
-        final TextView user = findViewById(R.id.textView5);
+        final TextView user = findViewById(R.id.DisplayMessageTextView3);
         user.setText(userMessage);
 
-        Button insertButton = findViewById(R.id.button);
+        final TextView ruby = findViewById(R.id.DisplayMessageTextView4);
+        ruby.setText(rubyMessage);
+
+        final TextView waon = findViewById(R.id.DisplayMessageTextView5);
+        waon.setText(waonMessage);
+
+        final TextView secure = findViewById(R.id.DisplayMessageTextView6);
+        secure.setText(secureMessage);
+
+        Button insertButton = findViewById(R.id.DisplayMessageButton1);
         insertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                SetRegistrationUser(waonMessage, secureMessage, idMessage, passMessage, userMessage);
-                Log.d("debug","Insert Userdata success");
+                //SetRegistrationUser(waonMessage, secureMessage, idMessage, passMessage, userMessage);
+                Log.d("debug","Display Userdata success");
                 GoFinish(v);
 
 
@@ -99,6 +106,32 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     public void GoFinish(View view){
         Intent intent = new Intent(this, FinishRegistrationUserActivity.class);
+        TextView idTextView = (TextView) findViewById(R.id.DisplayMessageTextView1);
+        String idMessage = idTextView.getText().toString();
+        intent.putExtra("ID", idMessage);
+
+
+        TextView userTextView = (TextView) findViewById(R.id.DisplayMessageTextView2);
+        String userMessage = userTextView.getText().toString();
+        intent.putExtra("USER", userMessage);
+
+
+        TextView passTextView = (TextView) findViewById(R.id.DisplayMessageTextView3);
+        String passMessage = passTextView.getText().toString();
+        intent.putExtra("PASS", passMessage);
+
+
+        TextView rubyTextView = (TextView) findViewById(R.id.DisplayMessageTextView4);
+        String rubyMessage = rubyTextView.getText().toString();
+        intent.putExtra("RUBY", userMessage);
+
+        TextView waonTextView = (TextView) findViewById(R.id.DisplayMessageTextView5);
+        String waonMessage = waonTextView.getText().toString();
+        intent.putExtra("WAON", waonMessage);
+
+        TextView secureTextView = (TextView) findViewById(R.id.DisplayMessageTextView6);
+        String secureMessage = secureTextView.getText().toString();
+        intent.putExtra("SECURE", secureMessage);
         startActivity(intent);
     }
 }
