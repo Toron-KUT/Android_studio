@@ -133,7 +133,7 @@ public class FinishRegistrationUserActivity extends AppCompatActivity {
 
                                 String mString = s;
                                 Log.d("degug","通信に成功しました 　結果 == " + mString);
-                                
+
                                 if(mString.equals("true")){
                                     Log.d("debug","ユーザー登録に成功しました");
                                     String Message = "ユーザー情報を登録しました．";
