@@ -1,5 +1,6 @@
 package com.toron.marunakadeokaimono_test;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -39,15 +40,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static String COLUMN_NAME_USER_ID = "user_id";
     private static String COLUMN_NAME_LOGIN_ID = "login_id";
     private static String COLUMN_NAME_NAME = "name";
-    private static String COLUMN_NAME_RUBI = "ruby";
-    private static String COLUMN_NAME_PASSWORD ="password";
-    private static String COLUMN_NAME_WAON = "waon";
-    private static String COLUMN_NAME_SECURITY = "security";
+   // private static String COLUMN_NAME_RUBI = "ruby";
+   // private static String COLUMN_NAME_PASSWORD ="password";
+   // private static String COLUMN_NAME_WAON = "waon";
+   // private static String COLUMN_NAME_SECURITY = "security";
     private static String COLUMN_NAME_STORE_ID = "store_id";
     private static String COLUMN_NAME_POINTS = "points";
 
     private RequestQueue mQueue;
     private JSONArray mArrayList = null;
+    private String userID;
 
     //テーブル作成文の発行
     private static final String SQL_CREATE_ENTRIES =
@@ -59,16 +61,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //ユーザテーブル作成文
     private static final String SQL_CREATE_USER =
             "CREATE TABLE " +  TABLE_NAME_USER + " (" +
-                    _ID + " INTEGER PRIMARY KEY  autoincrement," +
-                    COLUMN_NAME_USER_ID + " TEXT ," +
+                    COLUMN_NAME_USER_ID + " TEXT PRIMARY KEY," +
                     COLUMN_NAME_LOGIN_ID + " TEXT," +
                     COLUMN_NAME_NAME + " TEXT," +
-                    COLUMN_NAME_RUBI + " TEXT," +
-                    COLUMN_NAME_PASSWORD + " TEXT," +
-                    COLUMN_NAME_WAON + " TEXT," +
-                    COLUMN_NAME_SECURITY + " TEXT," +
-                    COLUMN_NAME_STORE_ID + " TEXT," +
-                    COLUMN_NAME_POINTS + " INTEGER)";
+                    COLUMN_NAME_POINTS + " INTEGER," +
+                    COLUMN_NAME_STORE_ID + " TEXT)";
 
     //保有食品テーブルを作成
     private static final String SQL_CREATE_HOLD =
@@ -118,7 +115,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    private JSONArray getJSONArray(){
+    public String getUserID(){
+        return userID;
+    }
+    public JSONArray getJSONArray(){
         return mArrayList;
     }
 
@@ -259,26 +259,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         try{
             //デバッグ
             // 用にローカルデータベースから接続
-            DatabaseHelper helper =this;
+            //DatabaseHelper helper =this;
+            ContentValues values = new ContentValues();
+            JSONObject mJSONObject = mJSONArray.getJSONObject(0);
+            values.put("user_id", mJSONObject.getString("user_id"));
+            values.put("login_id", mJSONObject.getString("login_id"));
+            values.put("name", mJSONObject.getString("name"));
+            values.put("points", mJSONObject.getInt("points"));
+            values.put("store_id", mJSONObject.getInt("store_id"));
 
-            Cursor cour = null;
-            int f = 0;
-           // cour = db.rawQuery("Insert into users values",null);
-            cour.close();
+            db.insert("testdb", null, values);
+            userID = mJSONObject.getString("user_id");
 
-
-
-            return true;
-
-
-
+            // cour = db.rawQuery("Insert into users values",null);
+            //cour.close();
 
         }catch(NullPointerException e){
-            Log.d("debug","nullpointerException for AuthenticationUser  " +e.getMessage());
+            Log.d("debug","nullpointerException for SetAuthenticationUser in DatabaseHelper  "   +e.getMessage());
             return false;
         }catch(SQLiteException e){
-            Log.d("debug","SQLiteException for AuthenticationUser  " +e.getMessage());
+            Log.d("debug","SQLiteException for SetAuthenticationUser in DatabaseHelper  " +e.getMessage());
             return false;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return false;
+        }finally{
+            return true;
         }
 
     }

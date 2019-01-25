@@ -150,7 +150,11 @@ public class AuthenticationUserActivity extends AppCompatActivity {
         boolean success = helper.SetAuthenticationUserData(mJSONArray,db);
 
         if(success == true){
+
             Log.d("debug","ユーザー情報のセットに成功しました");
+            //Intent intent = new Intent(this, HomeActivity.class);
+            Intent intent = new Intent(this, HoldingFoodActivity.class);
+            startActivity(intent);
 
         }
 
