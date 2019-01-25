@@ -45,7 +45,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
    // private static String COLUMN_NAME_WAON = "waon";
    // private static String COLUMN_NAME_SECURITY = "security";
     private static String COLUMN_NAME_STORE_ID = "store_id";
-    private static String COLUMN_NAME_POINTS = "points";
+    private static String COLUMN_NAME_POINTS = "point";
 
     private RequestQueue mQueue;
     private JSONArray mArrayList = null;
@@ -266,7 +266,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put("user_id", mJSONObject.getString("user_id"));
             values.put("login_id", mJSONObject.getString("login_id"));
             values.put("name", mJSONObject.getString("name"));
-            values.put("points", mJSONObject.getInt("points"));
+            values.put("point", mJSONObject.getInt("point"));
             values.put("store_id", mJSONObject.getInt("store_id"));
 
             db.insert("users", null, values);
