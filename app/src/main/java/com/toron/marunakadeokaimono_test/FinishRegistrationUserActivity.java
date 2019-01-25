@@ -52,7 +52,7 @@ public class FinishRegistrationUserActivity extends AppCompatActivity {
         params.put("security",intent.getStringExtra("SECURE"));
 
 
-        InsertNewUserData(params);
+        //InsertNewUserData(params);
         Button readButton = findViewById(R.id.FinishRegistrationUserbutton1);
 
         readButton.setOnClickListener(new View.OnClickListener() {

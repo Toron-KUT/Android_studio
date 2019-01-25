@@ -291,7 +291,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public  List<Map<String,Object>> GetHoldingFoodData(SQLiteDatabase db){
+    public  List<Map<String,Object>> GetHoldingFoodData_old(SQLiteDatabase db){
         List<Map<String,Object>>HoldList = new ArrayList<Map<String,Object>>();
         Map<String,Object> mFoodData;
         Cursor c = null;
@@ -335,6 +335,49 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
+    }
+    public List<Map<String,Object>> GetHoldingFoodData(JSONArray mJSONArray){
+        List<Map<String,Object>> mHoldingFoodList = new ArrayList<Map<String,Object>>();
+        Map<String,Object> mHoldingFood;
+        //DatabaseHelper mHelper = this;
+        //String mPHPURL = "http://172.21.48.127/server_php/Toron_BackEnd/php/getStore.php";
+
+        int f = 0;
+        try{
+            //JSONArray mJSONArray = mHelper.ReturnVolley(mPHPURL,c);
+            if(mJSONArray.length()!= 0){
+                do{
+                    JSONObject mJSONObject = mJSONArray.getJSONObject(f);
+                    String mHold_Name = mJSONObject.getString("name");
+                    String mHold_Num = mJSONObject.getString("num");
+                    String mHold_CreateDate = mJSONObject.getString("createDate");
+                    Log.d("debug","mStore_Name ==  " + mHold_Name);
+
+                    mHoldingFood = new HashMap<String,Object>();
+                    mHoldingFood.put("name",mHold_Name);
+                    mHoldingFood.put("num",mHold_Num);
+                    mHoldingFood.put("createDate",mHold_CreateDate);
+
+                    mHoldingFoodList.add(mHoldingFood);
+
+                    f++;
+                }while(f<mJSONArray.length());
+                Log.d("debug","special sale data set finish");
+            }
+            else{
+                Log.d("debug","特売情報がありませんでした");
+                return null;
+            }
+
+        }catch(SQLiteException e){
+            Log.d("debug","get specialfood data failed" + e.getMessage());
+            return null;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        } finally{
+            return mHoldingFoodList;
+        }
     }
 
     public  List<Map<String,Object>> GetPurchaseHistoryData(Context c){
@@ -429,8 +472,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         }catch(SQLiteException e){
             Log.d("debug","get specialfood data failed" + e.getMessage());
+            return null;
         } catch (JSONException e) {
             e.printStackTrace();
+            return null;
         } finally{
             return mSpecialSaleList;
         }

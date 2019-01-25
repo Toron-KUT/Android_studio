@@ -12,6 +12,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +35,9 @@ public class HoldingFoodActivity extends AppCompatActivity {
     private TextView mHoldingFoodData_CreateDate;
     private DatabaseHelper helper;
     private SQLiteDatabase db;
+    private RequestQueue mQueue;
+    private String PHPURL = "http://172.21.48.127/server_php/Toron_BackEnd/php/getHoldingFood.php";
+    // private String PHPURL =   "http://172.21.48.127/server_php/Toron_BackEnd/php/getStore.php";
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -72,15 +87,79 @@ public class HoldingFoodActivity extends AppCompatActivity {
                 db = helper.getReadableDatabase();
 
             }
-            List<Map<String,Object>> HoldList = helper.GetHoldingFoodData(db);
-            if(HoldList!=null){
-                Log.d("debug","HoldList success");
-                DisplayHoldingFood(HoldList);
-            }
-            else{
-                Log.d("debug","Holdlist failed");
-            }
+            //通信の発行
+            mQueue = Volley.newRequestQueue(this);
+            String POST_URL = PHPURL;
+            Log.d("debug","URL = " + POST_URL);
+            StringRequest stringReq=new StringRequest(Request.Method.POST,POST_URL,
 
+                    //通信成功
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String s) {
+                            try{
+
+                                String mString = s;
+                                Log.d("degug","通信に成功しました 　結果 == " + mString);
+                                JSONObject mJSONObject = new JSONObject(s);
+                                JSONArray mJSONArray = mJSONObject.getJSONArray("hold");
+
+                                List<Map<String,Object>> mHoldList = helper.GetHoldingFoodData(mJSONArray);
+
+                                DisplayHoldingFood(mHoldList);
+
+
+
+
+                                Log.d("debug","SelectHoldingFoodData Success");
+                                //List<Map<String,Object>> mArrayList = helper.GetSpecialSaleData(mJSONArray);
+                                //DisplaySpecialSale(mArrayList);
+                                //レスポンスが返ってきたらDisplaySpecialSale()を実行
+
+
+                            }catch(NullPointerException e){
+                                Log.d("degug","Nullpointエラー for HoldingFoodActivity " + e.getMessage());
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
+                            }
+
+                        }
+                    },
+
+                    //通信失敗
+                    new Response.ErrorListener(){
+                        @Override
+                        public void onErrorResponse(VolleyError error){
+                            Log.d("degug","通信に失敗しました " + error.getMessage());
+                        }
+                    }) {
+
+                //送信するデータを設定
+                @Override
+                protected Map<String, String> getParams() {
+                    //今回はUserIDを渡す
+                    Map<String,String>params = new HashMap<String, String>();
+
+                    String mUserID = helper.getUserID();
+                    params.put("user_id",mUserID);
+                    return params;
+
+                }
+            };
+            mQueue.add(stringReq);
+            //リクエストキューを発行
+
+
+
+
+            //List<Map<String,Object>> SpecialSaleList = helper.GetSpecialSaleData(helper,this);
+            //if(SpecialSaleList!=null){
+            //    Log.d("debug","SpecialSaleList success");
+            //    DisplaySpecialSale(SpecialSaleList);
+            //}
+            //else{
+            //    Log.d("debug","SpecialSaleList failed");
+            //}
         }catch(NullPointerException e){
             Log.d("debug"," null poirnt exception " + e.getMessage());
         }
@@ -97,9 +176,9 @@ public class HoldingFoodActivity extends AppCompatActivity {
             for(int i = 0;i < mHoldingFoodList.size();i++) {
                 Map<String, Object> mFoodData = mHoldingFoodList.get(i);
 
-                sbuilder_Product_Name.append(mFoodData.get("product_name").toString() + "\n");
+                sbuilder_Product_Name.append(mFoodData.get("name").toString() + "\n");
                 sbuilder_Num.append(mFoodData.get("num").toString() + "\n");
-                sbuilder_CreateDate.append(mFoodData.get("createdate").toString() + "\n");
+                sbuilder_CreateDate.append(mFoodData.get("createDate").toString() + "\n");
                 Log.d("debug","i= " + i);
 
 
