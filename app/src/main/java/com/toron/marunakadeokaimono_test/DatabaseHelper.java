@@ -260,6 +260,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             //デバッグ
             // 用にローカルデータベースから接続
             //DatabaseHelper helper =this;
+            db.execSQL("DELETE FROM users");
             ContentValues values = new ContentValues();
             JSONObject mJSONObject = mJSONArray.getJSONObject(0);
             values.put("user_id", mJSONObject.getString("user_id"));
@@ -268,8 +269,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put("points", mJSONObject.getInt("points"));
             values.put("store_id", mJSONObject.getInt("store_id"));
 
-            db.insert("testdb", null, values);
+            db.insert("users", null, values);
             userID = mJSONObject.getString("user_id");
+            Log.d("debug","無事ユーザー情報をセットできました　for SetAuthenticationUserData");
 
             // cour = db.rawQuery("Insert into users values",null);
             //cour.close();

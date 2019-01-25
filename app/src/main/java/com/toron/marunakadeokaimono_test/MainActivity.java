@@ -88,6 +88,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, RegistrationUserActivity.class);
         startActivity(intent);
     }
+    public void goAuthenticationUser(View view){
+        Intent intent = new Intent(this,  AuthenticationUserActivity.class);
+        startActivity(intent);
+    }
 
 
 }

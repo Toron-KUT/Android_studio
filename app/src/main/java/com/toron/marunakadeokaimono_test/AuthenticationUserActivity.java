@@ -23,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class AuthenticationUserActivity extends AppCompatActivity {
@@ -31,20 +32,19 @@ public class AuthenticationUserActivity extends AppCompatActivity {
     private RequestQueue mQueue;
     private String PHPURL = "http://172.21.48.127/server_php/Toron_BackEnd/php/getLoginInfo.php";
     private EditText editTextUser, editTextPassword;
-    private MediaRouteButton HideButton;
     private Map<String,String> mAuthenticationUserData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication_user);
-        Button readButton = findViewById(R.id.button5);
+        //Button readButton = findViewById(R.id.button5);
         editTextUser = findViewById(R.id.edit_text_User);
-        editTextPassword = findViewById(R.id.edit_text_User);
+        editTextPassword = findViewById(R.id.edit_text_Password);
 
-        Button HideButton = findViewById(R.id.button8);
+        Button ReadButton = findViewById(R.id.AuthenticationUser1);
 
-        readButton.setOnClickListener(new View.OnClickListener() {
+        ReadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AuthenticationUser();
@@ -61,12 +61,16 @@ public class AuthenticationUserActivity extends AppCompatActivity {
             if (db == null) {
                 db = helper.getReadableDatabase();
             }
+            mAuthenticationUserData = new HashMap<String,String>();
+            Log.d("debug","starting AuthenticationUser....");
             //JSON値の格納
-            mAuthenticationUserData = null;
-            String ID = editTextUser.toString();
-            String Password = editTextPassword.toString();
+            //Map<String,Object> mAuthenticationUser = new HashMap<String,Object>();
+            String ID = editTextUser.getText().toString();
+            String Password = editTextPassword.getText().toString();
+            Log.d("debug","login_id ==  " + ID + "password == " + Password);
             mAuthenticationUserData.put("login_id", ID);
             mAuthenticationUserData.put("password", Password);
+
 
             mQueue = Volley.newRequestQueue(this);
             String POST_URL = PHPURL;
@@ -78,20 +82,24 @@ public class AuthenticationUserActivity extends AppCompatActivity {
                         public void onResponse(String s) {
                             try {
 
-                                String mString = s;
-                                Log.d("degug", "通信に成功しました 　結果 == " + mString);
+                                //String mString = s;
+                                Log.d("degug", "通信に成功しました 　結果 == " + s);
 
 
-                                if (mString.equals("false")) {
+                                if (s.equals("false")) {
                                     Log.d("debug", "ユーザー認証に失敗しました");
                                     String Message = "ユーザー認証に失敗";
 
                                 } else {
                                     Log.d("debug", "ユーザー認証に成功しました");
                                     String Message = "ユーザー認証に成功．";
-                                    JSONObject mJSONObject = new JSONObject(mString);
+                                    JSONObject mJSONObject = new JSONObject(s);
+                                    //Log.d("debug","ここまではoK");
                                     JSONArray mJSONArray = mJSONObject.getJSONArray("users");
+                                    //JSONObject mmJSONObject = mJSONObject.getJSONObject("");
+                                    Log.d("debug","wao");
                                     SuccessAuthenticationUser(mJSONArray);
+
 
                                 }
 
@@ -132,7 +140,9 @@ public class AuthenticationUserActivity extends AppCompatActivity {
 
         }catch(SQLiteException e){
             Log.d("debug","ユーザー認証失敗" + e.getMessage());
-        }
+        }//catch(NullPointerException e){
+        //    Log.d("debug","null pointer Excepciton " +e.getMessage());
+        //}
     }
 
     private void TransitionHomeActivity() {
@@ -157,6 +167,7 @@ public class AuthenticationUserActivity extends AppCompatActivity {
             startActivity(intent);
 
         }
+
 
 
     }

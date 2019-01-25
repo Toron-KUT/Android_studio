@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edit_text_User" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/AuthenticationUser1"
         android:layout_width="wrap_content"
         android:layout_height="47dp"
         android:layout_marginTop="8dp"

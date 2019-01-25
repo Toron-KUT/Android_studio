@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -41,6 +43,7 @@ public class FinishRegistrationUserActivity extends AppCompatActivity {
         Intent intent = getIntent();
         //送信するデータを設定，格納
         params = new HashMap<String, String>();
+        Log.d("debug","debug message user ==  " +intent.getStringExtra("ID") + " - " +intent.getStringExtra("PASS") + " - " + intent.getStringExtra("USER") + " - " +intent.getStringExtra("SECURE"));
         params.put("login_id",intent.getStringExtra("ID"));
         params.put("password",intent.getStringExtra("PASS"));
         params.put("name",intent.getStringExtra("USER"));
@@ -50,6 +53,14 @@ public class FinishRegistrationUserActivity extends AppCompatActivity {
 
 
         InsertNewUserData(params);
+        Button readButton = findViewById(R.id.FinishRegistrationUserbutton1);
+
+        readButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoAuthenticationUser();
+            }
+        });
     }
 
     private void readData() {
@@ -200,6 +211,11 @@ public class FinishRegistrationUserActivity extends AppCompatActivity {
     private void DisplayFinishRegistration(String mMessage){
         final TextView id = findViewById(R.id.FinishRegistrationUserTextView1);
         id.setText(mMessage);
+    }
+
+    private void GoAuthenticationUser(){
+        Intent intent = new Intent(this, AuthenticationUserActivity.class);
+        startActivity(intent);
     }
 
 }

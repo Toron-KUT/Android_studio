@@ -111,14 +111,13 @@ public class DisplayMessageActivity extends AppCompatActivity {
         intent.putExtra("ID", idMessage);
 
 
-        TextView userTextView = (TextView) findViewById(R.id.DisplayMessageTextView2);
-        String userMessage = userTextView.getText().toString();
-        intent.putExtra("USER", userMessage);
-
-
-        TextView passTextView = (TextView) findViewById(R.id.DisplayMessageTextView3);
+        TextView passTextView = (TextView) findViewById(R.id.DisplayMessageTextView2);
         String passMessage = passTextView.getText().toString();
         intent.putExtra("PASS", passMessage);
+
+        TextView userTextView = (TextView) findViewById(R.id.DisplayMessageTextView3);
+        String userMessage = userTextView.getText().toString();
+        intent.putExtra("USER", userMessage);
 
 
         TextView rubyTextView = (TextView) findViewById(R.id.DisplayMessageTextView4);
