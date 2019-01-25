@@ -267,10 +267,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put("login_id", mJSONObject.getString("login_id"));
             values.put("name", mJSONObject.getString("name"));
             values.put("point", mJSONObject.getInt("point"));
-            values.put("store_id", mJSONObject.getInt("store_id"));
+            values.put("store_id", mJSONObject.getString("store_id"));
+
+            //nullの回避
+            //int store = mJSONObject.getString("store_id");
+            //if(store != null) {
+            //    values.put("store_id", mJSONObject.getInt("store_id"));
+            //}
+
 
             db.insert("users", null, values);
             userID = mJSONObject.getString("user_id");
+
             Log.d("debug","無事ユーザー情報をセットできました　for SetAuthenticationUserData");
 
             // cour = db.rawQuery("Insert into users values",null);

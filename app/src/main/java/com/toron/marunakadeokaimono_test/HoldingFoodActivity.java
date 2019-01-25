@@ -100,18 +100,20 @@ public class HoldingFoodActivity extends AppCompatActivity {
                             try{
 
                                 String mString = s;
-                                Log.d("degug","通信に成功しました 　結果 == " + mString);
-                                JSONObject mJSONObject = new JSONObject(s);
-                                JSONArray mJSONArray = mJSONObject.getJSONArray("hold");
+                                Log.d("degug", "通信に成功しました 　結果 == " + mString);
+                                if(mString.equals("false")) {
+                                    Log.d("debug","取得失敗");
+                                }
+                                else{
+                                    Log.d("degug", "通信に成功しました 　結果 == " + mString);
+                                    JSONObject mJSONObject = new JSONObject(s);
+                                    JSONArray mJSONArray = mJSONObject.getJSONArray("hold");
 
-                                List<Map<String,Object>> mHoldList = helper.GetHoldingFoodData(mJSONArray);
+                                    List<Map<String, Object>> mHoldList = helper.GetHoldingFoodData(mJSONArray);
 
-                                DisplayHoldingFood(mHoldList);
-
-
-
-
-                                Log.d("debug","SelectHoldingFoodData Success");
+                                    DisplayHoldingFood(mHoldList);
+                                }
+                                
                                 //List<Map<String,Object>> mArrayList = helper.GetSpecialSaleData(mJSONArray);
                                 //DisplaySpecialSale(mArrayList);
                                 //レスポンスが返ってきたらDisplaySpecialSale()を実行
@@ -138,9 +140,12 @@ public class HoldingFoodActivity extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() {
                     //今回はUserIDを渡す
+
                     Map<String,String>params = new HashMap<String, String>();
 
-                    String mUserID = helper.getUserID();
+                    //String mUserID = helper.getUserID();
+                    String mUserID = "12";
+                    Log.d("debug","getting UserID...   " + mUserID );
                     params.put("user_id",mUserID);
                     return params;
 
