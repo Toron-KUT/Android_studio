@@ -68,8 +68,8 @@ public class SpecialSaleActivity extends AppCompatActivity {
                                 JSONArray mJSONArray = mJSONObject.getJSONArray("stores");
 
                                 Log.d("debug","getSotre Volley Success");
-                                List<Map<String,Object>> mArrayList = helper.GetSpecialSaleData(mJSONArray);
-                                DisplaySpecialSale(mArrayList);
+                                //List<Map<String,Object>> mArrayList = helper.GetSpecialSaleData(mJSONArray);
+                                //DisplaySpecialSale(mArrayList);
                                 //レスポンスが返ってきたらDisplaySpecialSale()を実行
 
 

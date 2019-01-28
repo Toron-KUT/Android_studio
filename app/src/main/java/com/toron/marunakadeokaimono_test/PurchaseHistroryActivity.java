@@ -47,22 +47,42 @@ public class PurchaseHistroryActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    TransitionHoldingFoodActivity();
                     mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_dashboard:
+                    TransitionPurchaseHistoryActivity();
                     mTextMessage.setText(R.string.title_dashboard);
                     return true;
                 case R.id.navigation_notifications:
+                    TransitionSpecialSaleActivity();
                     mTextMessage.setText(R.string.title_notifications);
                     return true;
                 case R.id.navigation_other:
-                    //TransitionFavoriteShopActivity();
+                    TransitionOtherActivity();
                     mTextMessage.setText(R.string.title_other);
                     return true;
             }
             return false;
         }
     };
+    private void TransitionHoldingFoodActivity() {
+        Intent intent = new Intent(this, HoldingFoodActivity.class);
+        startActivity(intent);
+    }
+    private void TransitionPurchaseHistoryActivity() {
+        Intent intent = new Intent(this, PurchaseHistroryActivity.class);
+        startActivity(intent);
+    }
+    private void TransitionSpecialSaleActivity() {
+        Intent intent = new Intent(this, SpecialSaleActivity.class);
+        startActivity(intent);
+    }
+
+    private void TransitionOtherActivity() {
+        Intent intent = new Intent(this, OtherActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,31 +207,47 @@ public class PurchaseHistroryActivity extends AppCompatActivity {
             //StringBuilder sbuilder_createDate = new StringBuilder();
 
 
-            for (int i = 0; i < mPurchaseHistoryList.size(); i++) {
-                Map<String, Object> mPurchaseHistory = mPurchaseHistoryList.get(i);
+            for (int i = 1; i < mPurchaseHistoryList.size(); i++) {
+                Map<String, Object> mPurchaseHistory = mPurchaseHistoryList.get(i-1);
 
-                View view = getLayoutInflater().inflate(R.layout.tablelayout, table);
+                View view = getLayoutInflater().inflate(R.layout.tablelayout_purchase, table);
 
                 //int text_id = 1;
                 //TextView text = view.findViewById(R.id.tableView2);
                 //text.setId(text_id);
                 //text.setText(mPurchaseHistory.get("name").toString());
                 // テキストを変更
-                mPurchaseHistoryData_name = view.findViewById(R.id.tableView1);
-                mPurchaseHistoryData_num = view.findViewById(R.id.tableView2);
-                mPurchaseHistoryData_price = view.findViewById(R.id.tableView3);
-                mPurchaseHistoryData_createDate = view.findViewById(R.id.tableView4);
 
+                int text_name = 10 * i + 1;
+                TextView mTextName = view.findViewById(R.id.tableView_Purchase1);
+                mTextName.setId(text_name);
 
+                int text_price = 10 * i+ 2;
+                TextView mTextPrice = view.findViewById(R.id.tableView_Purchase2);
+                mTextPrice.setId(text_price);
+
+                int text_num = 10 * i+ 3;
+                TextView mTextNum = view.findViewById(R.id.tableView_Purchase3);
+                mTextNum.setId(text_num);
+
+                int text_createDate = 10 * i+ 4;
+                TextView mTextCreateDate = view.findViewById(R.id.tableView_Purchase4);
+                mTextCreateDate.setId(text_createDate);
+                Log.d("debug","mFavoriteShopList.store_id == " + mPurchaseHistory.get("name").toString());
+
+                //int text_name = 10 * Integer.parseInt(mPurchaseHistory.get("store_id").toString() + 2);
+                //TextView mTextName = view.findViewById(R.id.tableView_Favorite2);
+                //mTextName.setId(text_name);
 
 
                 //sbuilder_num.append(mPurchaseHistory.get("num").toString() + "\n");
                 //sbuilder_name.append(mPurchaseHistory.get("price").toString() + "\n");
                 //sbuilder_num.append(mPurchaseHistory.get("createDate").toString() + "\n");
-                mPurchaseHistoryData_name.setText(mPurchaseHistory.get("name").toString());
-                mPurchaseHistoryData_num.setText(mPurchaseHistory.get("num").toString());
-                mPurchaseHistoryData_price.setText(mPurchaseHistory.get("price").toString());
-                mPurchaseHistoryData_createDate.setText(mPurchaseHistory.get("createDate").toString());
+                mTextName.setText(mPurchaseHistory.get("name").toString());
+                mTextPrice.setText(mPurchaseHistory.get("price").toString());
+                mTextNum.setText(mPurchaseHistory.get("num").toString());
+                mTextCreateDate.setText(mPurchaseHistory.get("createDate").toString());
+
 
                 Log.d("debug", "i= " + i);
                 //Log.d("debug", " mPurchaseHistoryData_User_ID  ==" + sbuilder_name.toString());

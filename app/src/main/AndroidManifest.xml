@@ -48,7 +48,9 @@
             android:label="@string/title_activity_purchase_histrory" />
         <activity android:name=".SpecialSaleActivity" />
         <activity android:name=".OtherActivity" />
-        <activity android:name=".RegistrationUserActivity"></activity>
+        <activity android:name=".RegistrationUserActivity" />
+        <activity android:name=".FragmentTestActivity" />
+        <activity android:name=".FavoriteShopActivity"></activity>
     </application>
 
 </manifest>

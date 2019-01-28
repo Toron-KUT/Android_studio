@@ -470,9 +470,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public  List<Map<String,Object>> GetSpecialSaleData( JSONArray mJSONArray){
-        List<Map<String,Object>> mSpecialSaleList = new ArrayList<Map<String,Object>>();
-        Map<String,Object> mSpecialSale;
+    public  List<Map<String,Object>> GetFavoriteShopData( JSONArray mJSONArray){
+        List<Map<String,Object>> mFavoriteShopList = new ArrayList<Map<String,Object>>();
+        Map<String,Object> mFavoriteShop;
         //DatabaseHelper mHelper = this;
         //String mPHPURL = "http://172.21.48.127/server_php/Toron_BackEnd/php/getStore.php";
 
@@ -482,18 +482,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             if(mJSONArray.length()!= 0){
                 do{
                     JSONObject mJSONObject = mJSONArray.getJSONObject(f);
+
+                    String mStore_ID = mJSONObject.getString("store_id");
                     String mStore_Name = mJSONObject.getString("name");
                     Log.d("debug","mStore_Name ==  " + mStore_Name);
 
 
-                    mSpecialSale = new HashMap<String,Object>();
-                    mSpecialSale.put("name",mStore_Name);
-
-                    mSpecialSaleList.add(mSpecialSale);
+                    mFavoriteShop = new HashMap<String,Object>();
+                    mFavoriteShop.put("store_id",mStore_ID);
+                    mFavoriteShop.put("name",mStore_Name);
+                    mFavoriteShopList.add(mFavoriteShop);
 
                     f++;
                 }while(f<mJSONArray.length());
-                Log.d("debug","special sale data set finish");
+                Log.d("debug","FavoriteShop data set finish");
             }
             else{
                 Log.d("debug","特売情報がありませんでした");
@@ -501,13 +503,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
 
         }catch(SQLiteException e){
-            Log.d("debug","get specialfood data failed" + e.getMessage());
+            Log.d("debug","get FavoriteShop data failed" + e.getMessage());
             return null;
         } catch (JSONException e) {
             e.printStackTrace();
             return null;
         } finally{
-            return mSpecialSaleList;
+            return mFavoriteShopList;
         }
     }
 

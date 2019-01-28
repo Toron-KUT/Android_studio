@@ -47,27 +47,40 @@ public class HoldingFoodActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    TransitionFavoriteShopActivity();
+                    TransitionHoldingFoodActivity();
                     mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_dashboard:
-                    TransitionFavoriteShopActivity();
+                    TransitionPurchaseHistoryActivity();
                     mTextMessage.setText(R.string.title_dashboard);
                     return true;
                 case R.id.navigation_notifications:
-                    TransitionFavoriteShopActivity();
+                    TransitionSpecialSaleActivity();
                     mTextMessage.setText(R.string.title_notifications);
                     return true;
                 case R.id.navigation_other:
-                    TransitionFavoriteShopActivity();
+                    TransitionOtherActivity();
                     mTextMessage.setText(R.string.title_other);
                     return true;
             }
             return false;
         }
     };
-    private void TransitionFavoriteShopActivity() {
+    private void TransitionHoldingFoodActivity() {
+        Intent intent = new Intent(this, HoldingFoodActivity.class);
+        startActivity(intent);
+    }
+    private void TransitionPurchaseHistoryActivity() {
         Intent intent = new Intent(this, PurchaseHistroryActivity.class);
+        startActivity(intent);
+    }
+    private void TransitionSpecialSaleActivity() {
+        Intent intent = new Intent(this, SpecialSaleActivity.class);
+        startActivity(intent);
+    }
+
+    private void TransitionOtherActivity() {
+        Intent intent = new Intent(this, OtherActivity.class);
         startActivity(intent);
     }
 
