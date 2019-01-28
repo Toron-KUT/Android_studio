@@ -1,5 +1,6 @@
 package com.toron.marunakadeokaimono_test;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -46,18 +47,29 @@ public class HoldingFoodActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    TransitionFavoriteShopActivity();
                     mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_dashboard:
+                    TransitionFavoriteShopActivity();
                     mTextMessage.setText(R.string.title_dashboard);
                     return true;
                 case R.id.navigation_notifications:
+                    TransitionFavoriteShopActivity();
                     mTextMessage.setText(R.string.title_notifications);
+                    return true;
+                case R.id.navigation_other:
+                    TransitionFavoriteShopActivity();
+                    mTextMessage.setText(R.string.title_other);
                     return true;
             }
             return false;
         }
     };
+    private void TransitionFavoriteShopActivity() {
+        Intent intent = new Intent(this, PurchaseHistroryActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +102,7 @@ public class HoldingFoodActivity extends AppCompatActivity {
             //通信の発行
             mQueue = Volley.newRequestQueue(this);
             String POST_URL = PHPURL;
-            Log.d("debug","URL = " + POST_URL);
+            //Log.d("debug","URL for Holdingfood = " + POST_URL);
             StringRequest stringReq=new StringRequest(Request.Method.POST,POST_URL,
 
                     //通信成功
@@ -143,8 +155,8 @@ public class HoldingFoodActivity extends AppCompatActivity {
 
                     Map<String,String>params = new HashMap<String, String>();
 
-                    //String mUserID = helper.getUserID();
-                    String mUserID = "12";
+                    String mUserID = helper.getUserID(db);
+                    //String mUserID = "12";
                     Log.d("debug","getting UserID...   " + mUserID );
                     params.put("user_id",mUserID);
                     return params;

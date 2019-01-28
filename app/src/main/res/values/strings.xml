@@ -3,6 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_other">その他</string>
     <string name="waon_massage">waon_number</string>
     <string name="secure_massage">secure_code</string>
     <string name="id_massage">login_id</string>

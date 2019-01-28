@@ -49,7 +49,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private RequestQueue mQueue;
     private JSONArray mArrayList = null;
-    private String userID;
 
     //テーブル作成文の発行
     private static final String SQL_CREATE_ENTRIES =
@@ -115,8 +114,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public String getUserID(){
-        return userID;
+    public String getUserID(SQLiteDatabase db){
+        String UserID = null;
+        Cursor cursor = null;
+        try{
+            Log.d("debug","checking user_id data....");
+            cursor = db.query(
+                    "users",
+                    new String[] { "user_id"} ,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+            );
+
+            cursor.moveToFirst();
+
+            UserID = cursor.getString(0);
+
+            cursor.close();
+
+        }catch(SQLiteException e){
+            Log.d("debug","user get error" + e.getMessage());
+            return null;
+        }finally{
+            cursor.close();
+            return UserID;
+        }
+
     }
     public JSONArray getJSONArray(){
         return mArrayList;
@@ -277,7 +303,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
             db.insert("users", null, values);
-            userID = mJSONObject.getString("user_id");
+
 
             Log.d("debug","無事ユーザー情報をセットできました　for SetAuthenticationUserData");
 
@@ -388,42 +414,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public  List<Map<String,Object>> GetPurchaseHistoryData(Context c){
+    public  List<Map<String,Object>> GetPurchaseHistoryData(JSONArray mJSONArray){
         Log.d("debug","GetPurchaseHistoryData for DatavaseHelper  startd...");
         List<Map<String,Object>> mPurchaseHistoryList = new ArrayList<Map<String,Object>>();
         Map<String,Object> mPurchaseHistory;
-        DatabaseHelper mHelper = this;
-        String mPHPURL = "http://172.21.48.131/test/SDataPostPHP3.php";
-
         int f = 0;
         try{
             //テスト用
-            JSONArray mJSONArray = mHelper.StartVolley(mPHPURL,c);
-            JSONArray mmJSONArray = getJSONArray();
 
             //while(true){
             //    mmJSONArray = getJSONArray();
             //    if(mmJSONArray != null)break;
             //}
-
-
-
-            if(mmJSONArray.length()!= 0){
+            if(mJSONArray.length()!= 0){
                 do{
-                    JSONObject mJSONObject = mmJSONArray.getJSONObject(f);
-                    String mUser_Id = mJSONObject.getString("userid");
-                    Log.d("debug","GetPurchaceHistory Data userID for databaseHelper == " + mUser_Id);
+                    JSONObject mJSONObject = mJSONArray.getJSONObject(f);
+                    String mName = mJSONObject.getString("name");
+                    String mNum = mJSONObject.getString("num");
+                    String mPrice = mJSONObject.getString("price");
+                    String mCreteDate = mJSONObject.getString("createDate");
+                    Log.d("debug","GetPurchaceHistory Data userID for databaseHelper == " + mName);
 
-                    String mPassword = mJSONObject.getString("password");
+
 
                     mPurchaseHistory = new HashMap<String,Object>();
-                    mPurchaseHistory.put("userid",mUser_Id);
-                    mPurchaseHistory.put("password",mPassword);
+                    mPurchaseHistory.put("name",mName);
+                    mPurchaseHistory.put("num",mNum);
+                    mPurchaseHistory.put("price",mPrice);
+                    mPurchaseHistory.put("createDate",mCreteDate);
 
                     mPurchaseHistoryList.add(mPurchaseHistory);
                     Map<String, Object> mPurchaseHistoryData = mPurchaseHistoryList.get(f);
-                    Log.d("debug","debug get code on Arraylist for databasehelper  == " +  mPurchaseHistoryData.get("userid").toString());
-
+                    Log.d("debug","debug get code on Arraylist for databasehelper  == " +  mPurchaseHistoryData.get("num").toString());
                     f++;
                 }while(f<mJSONArray.length());
                 Log.d("debug","test data set finish");

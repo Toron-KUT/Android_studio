@@ -52,7 +52,7 @@ public class FinishRegistrationUserActivity extends AppCompatActivity {
         params.put("security",intent.getStringExtra("SECURE"));
 
 
-        //InsertNewUserData(params);
+        InsertNewUserData(params);
         Button readButton = findViewById(R.id.FinishRegistrationUserbutton1);
 
         readButton.setOnClickListener(new View.OnClickListener() {
@@ -137,6 +137,7 @@ public class FinishRegistrationUserActivity extends AppCompatActivity {
             StringRequest stringReq=new StringRequest(Request.Method.POST,POST_URL,
 
                     //通信成功
+
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String s) {
