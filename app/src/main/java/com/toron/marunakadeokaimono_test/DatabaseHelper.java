@@ -470,6 +470,52 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public  List<Map<String,Object>> GetSpecialSaleData( JSONArray mJSONArray){
+        List<Map<String,Object>> mSpecialSaleList = new ArrayList<Map<String,Object>>();
+        Map<String,Object> mSpecialSale;
+        //DatabaseHelper mHelper = this;
+        //String mPHPURL = "http://172.21.48.127/server_php/Toron_BackEnd/php/getStore.php";
+
+        int f = 0;
+        try{
+            //JSONArray mJSONArray = mHelper.ReturnVolley(mPHPURL,c);
+            if(mJSONArray.length()!= 0){
+                do{
+                    JSONObject mJSONObject = mJSONArray.getJSONObject(f);
+
+                    String mSpecialSale_ID = mJSONObject.getString("name");
+                    String mSpecialSale_Name = mJSONObject.getString("price");
+                    String mSpecialSale_Category = mJSONObject.getString("category_name");
+                    Log.d("debug","mStore_Name ==  " + mSpecialSale_Name);
+
+
+                    mSpecialSale = new HashMap<String,Object>();
+                    mSpecialSale.put("name",mSpecialSale_ID);
+                    mSpecialSale.put("price",mSpecialSale_Name);
+                    mSpecialSale.put("category_name",mSpecialSale_Category);
+                    mSpecialSaleList.add(mSpecialSale);
+
+                    f++;
+                }while(f<mJSONArray.length());
+                Log.d("debug","FavoriteShop data set finish");
+            }
+            else{
+                Log.d("debug","特売情報がありませんでした");
+                return null;
+            }
+
+        }catch(SQLiteException e){
+            Log.d("debug","get FavoriteShop data failed" + e.getMessage());
+            return null;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        } finally{
+            return mSpecialSaleList;
+        }
+    }
+
+
     public  List<Map<String,Object>> GetFavoriteShopData( JSONArray mJSONArray){
         List<Map<String,Object>> mFavoriteShopList = new ArrayList<Map<String,Object>>();
         Map<String,Object> mFavoriteShop;

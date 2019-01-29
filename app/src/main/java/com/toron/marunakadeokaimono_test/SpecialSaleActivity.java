@@ -1,10 +1,15 @@
 package com.toron.marunakadeokaimono_test;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -28,20 +33,68 @@ public class SpecialSaleActivity extends AppCompatActivity {
     private DatabaseHelper helper;
     private SQLiteDatabase db;
     private RequestQueue mQueue;
-    private String PHPURL = "http://172.21.48.127/server_php/Toron_BackEnd/php/getStore.php";
+    private String PHPURL = "http://172.21.48.127/server_php/Toron_BackEnd/php/getSpecialSale.php";
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    TransitionHoldingFoodActivity();
+                    //mTextMessage.setText(R.string.title_home);
+                    return true;
+                case R.id.navigation_dashboard:
+                    TransitionPurchaseHistoryActivity();
+                    //mTextMessage.setText(R.string.title_dashboard);
+                    return true;
+                case R.id.navigation_notifications:
+                    TransitionSpecialSaleActivity();
+                    //mTextMessage.setText(R.string.title_notifications);
+                    return true;
+                case R.id.navigation_other:
+                    TransitionOtherActivity();
+                    //mTextMessage.setText(R.string.title_other);
+                    return true;
+            }
+            return false;
+        }
+    };
+    private void TransitionHoldingFoodActivity() {
+        Intent intent = new Intent(this, HoldingFoodActivity.class);
+        startActivity(intent);
+    }
+    private void TransitionPurchaseHistoryActivity() {
+        Intent intent = new Intent(this, PurchaseHistroryActivity.class);
+        startActivity(intent);
+    }
+    private void TransitionSpecialSaleActivity() {
+        Intent intent = new Intent(this, SpecialSaleActivity.class);
+        startActivity(intent);
+    }
+
+    private void TransitionOtherActivity() {
+        Intent intent = new Intent(this, OtherActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_special_sale);
-        Button readButton = findViewById(R.id.button12);
-        readButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                GetSpecialSaleData();
+        //mTextMessage = (TextView) findViewById(R.id.message);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        GetSpecialSaleData();
+        //Button readButton = findViewById(R.id.button12);
+        //readButton.setOnClickListener(new View.OnClickListener() {
+        //    @Override
+        //    public void onClick(View v) {
+        //        GetSpecialSaleData();
 
-            }
-        });
+        //    }
+        //});
     }
 
     private void GetSpecialSaleData(){
@@ -63,13 +116,13 @@ public class SpecialSaleActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(String s) {
                             try{
-                                Log.d("degug","通信に成功しました");
+                                Log.d("degug","通信に成功しました SpecialSale Data = " + s);
                                 JSONObject mJSONObject = new JSONObject(s);
-                                JSONArray mJSONArray = mJSONObject.getJSONArray("stores");
+                                JSONArray mJSONArray = mJSONObject.getJSONArray("sp_sale");
 
-                                Log.d("debug","getSotre Volley Success");
-                                //List<Map<String,Object>> mArrayList = helper.GetSpecialSaleData(mJSONArray);
-                                //DisplaySpecialSale(mArrayList);
+                                Log.d("debug","getSale Volley Success");
+                                List<Map<String,Object>> mArrayList = helper.GetSpecialSaleData(mJSONArray);
+                                DisplaySpecialSale(mArrayList);
                                 //レスポンスが返ってきたらDisplaySpecialSale()を実行
 
 
@@ -111,19 +164,39 @@ public class SpecialSaleActivity extends AppCompatActivity {
 
     private void DisplaySpecialSale(List<Map<String,Object>> mSpecialSaleList){
         try{
-            mSpecialSaleData_Store_Name = findViewById(R.id.textView34);
+            ViewGroup table = (ViewGroup) findViewById(R.id.table_SpecialSale);
+            Log.d("debug","mSpecialSaleList.size == " +  mSpecialSaleList.size());
 
-            StringBuilder sbuilder_Store_Name = new StringBuilder();
+
+            for (int i = 1; i <=  mSpecialSaleList.size(); i++) {
+                Map<String, Object> mSpecialSale = mSpecialSaleList.get(i-1);
+
+                View view = getLayoutInflater().inflate(R.layout.tablelayout_specialsale, table);
 
 
-            for(int i = 0;i < mSpecialSaleList.size();i++) {
-                Map<String, Object> mFoodData = mSpecialSaleList.get(i);
+                int text_name = 10 * i + 1;
+                TextView mTextName = view.findViewById(R.id.tableView_SpecialSale1);
+                mTextName.setId(text_name);
 
-                sbuilder_Store_Name.append(mFoodData.get("name").toString() + "\n");
+                int text_price =10 * i + 2;
+                TextView mTextPrice = view.findViewById(R.id.tableView_SpecialSale2);
+                mTextPrice.setId(text_price);
 
-                Log.d("debug","i= " + i);
+                int text_Category = 10 * i + 3;
+                TextView mTextCategory = view.findViewById(R.id.tableView_SpecialSale3);
+                mTextCategory.setId(text_Category);
+
+                Log.d("debug","mSpecialSaleList.store_id == " + mSpecialSale.get("name").toString());
+
+                
+                mTextName.setText(mSpecialSale.get("name").toString());
+                mTextPrice.setText(mSpecialSale.get("price").toString());
+                mTextCategory.setText(mSpecialSale.get("category_name").toString());
+
+
+                Log.d("debug", "i= " + i);
+                //Log.d("debug", " mPurchaseHistoryData_User_ID  ==" + sbuilder_name.toString());
             }
-            mSpecialSaleData_Store_Name.setText(sbuilder_Store_Name.toString());
 
 
             Log.d("debug","mSpecialSaleList.size=" + mSpecialSaleList.size());

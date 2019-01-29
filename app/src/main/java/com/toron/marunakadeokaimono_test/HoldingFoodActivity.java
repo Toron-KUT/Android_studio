@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -139,9 +140,9 @@ public class HoldingFoodActivity extends AppCompatActivity {
                                     DisplayHoldingFood(mHoldList);
                                 }
                                 
-                                //List<Map<String,Object>> mArrayList = helper.GetSpecialSaleData(mJSONArray);
-                                //DisplaySpecialSale(mArrayList);
-                                //レスポンスが返ってきたらDisplaySpecialSale()を実行
+                                //List<Map<String,Object>> mArrayList = helper.GetHoldingFoodData(mJSONArray);
+                                //DisplayHoldingFood(mArrayList);
+                                //レスポンスが返ってきたらDisplayHoldingFood()を実行
 
 
                             }catch(NullPointerException e){
@@ -182,13 +183,13 @@ public class HoldingFoodActivity extends AppCompatActivity {
 
 
 
-            //List<Map<String,Object>> SpecialSaleList = helper.GetSpecialSaleData(helper,this);
-            //if(SpecialSaleList!=null){
-            //    Log.d("debug","SpecialSaleList success");
-            //    DisplaySpecialSale(SpecialSaleList);
+            //List<Map<String,Object>> HoldingFoodList = helper.GetHoldingFoodData(helper,this);
+            //if(HoldingFoodList!=null){
+            //    Log.d("debug","HoldingFoodList success");
+            //    DisplayHoldingFood(HoldingFoodList);
             //}
             //else{
-            //    Log.d("debug","SpecialSaleList failed");
+            //    Log.d("debug","HoldingFoodList failed");
             //}
         }catch(NullPointerException e){
             Log.d("debug"," null poirnt exception " + e.getMessage());
@@ -196,26 +197,38 @@ public class HoldingFoodActivity extends AppCompatActivity {
     }
     private void DisplayHoldingFood(List<Map<String,Object>> mHoldingFoodList){
         try{
-            mHoldingFoodData_Product_Name = findViewById(R.id.textView21);
-            mHoldingFoodData_Num = findViewById(R.id.textView22);
-            mHoldingFoodData_CreateDate = findViewById(R.id.textView23);
-            StringBuilder sbuilder_Product_Name = new StringBuilder();
-            StringBuilder sbuilder_Num = new StringBuilder();
-            StringBuilder sbuilder_CreateDate= new StringBuilder();
-
-            for(int i = 0;i < mHoldingFoodList.size();i++) {
-                Map<String, Object> mFoodData = mHoldingFoodList.get(i);
-
-                sbuilder_Product_Name.append(mFoodData.get("name").toString() + "\n");
-                sbuilder_Num.append(mFoodData.get("num").toString() + "\n");
-                sbuilder_CreateDate.append(mFoodData.get("createDate").toString() + "\n");
-                Log.d("debug","i= " + i);
+            ViewGroup table = (ViewGroup) findViewById(R.id.table_HoldingFood);
+            Log.d("debug","mHoldingFoodList.size == " +  mHoldingFoodList.size());
 
 
+            for (int i = 1; i <=  mHoldingFoodList.size(); i++) {
+                Map<String, Object> mHoldingFood = mHoldingFoodList.get(i - 1);
+
+                View view = getLayoutInflater().inflate(R.layout.tablelayout_holdingfood, table);
+
+
+                int text_name = 10 * i + 1;
+                TextView mTextName = view.findViewById(R.id.tableView_HoldingFood1);
+                mTextName.setId(text_name);
+
+                int text_price = 10 * i + 2;
+                TextView mTextPrice = view.findViewById(R.id.tableView_HoldingFood2);
+                mTextPrice.setId(text_price);
+
+                int text_Category = 10 * i + 3;
+                TextView mTextCategory = view.findViewById(R.id.tableView_HoldingFood3);
+                mTextCategory.setId(text_Category);
+
+                Log.d("debug", "mHoldingFoodList.store_id == " + mHoldingFood.get("name").toString());
+
+
+                mTextName.setText(mHoldingFood.get("name").toString());
+                mTextPrice.setText(mHoldingFood.get("num").toString());
+                mTextCategory.setText(mHoldingFood.get("createDate").toString());
+
+
+                Log.d("debug", "i= " + i);
             }
-            mHoldingFoodData_Product_Name.setText(sbuilder_Product_Name.toString());
-            mHoldingFoodData_Num.setText(sbuilder_Num.toString());
-            mHoldingFoodData_CreateDate.setText(sbuilder_CreateDate.toString());
 
             Log.d("debug","mHoldingFoodList.size=" + mHoldingFoodList.size());
 
