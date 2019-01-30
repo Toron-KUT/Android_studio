@@ -72,10 +72,21 @@ public class OtherActivity extends AppCompatActivity {
                 TransitionFavoriteShopActivity();
             }
         });
+        Button ChangeButton = findViewById(R.id.OtherButton2);
+        ChangeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TransitionChangePasswordActivity();
+            }
+        });
 
     }
-    private void TransitionFavoriteShopActivity() {
+    public void TransitionFavoriteShopActivity() {
         Intent intent = new Intent(this, FavoriteShopActivity.class);
+        startActivity(intent);
+    }
+    public void TransitionChangePasswordActivity() {
+        Intent intent = new Intent(this, ChangePasswordActivity.class);
         startActivity(intent);
     }
 }

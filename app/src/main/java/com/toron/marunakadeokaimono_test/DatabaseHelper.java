@@ -42,8 +42,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static String COLUMN_NAME_NAME = "name";
    // private static String COLUMN_NAME_RUBI = "ruby";
    // private static String COLUMN_NAME_PASSWORD ="password";
-   // private static String COLUMN_NAME_WAON = "waon";
-   // private static String COLUMN_NAME_SECURITY = "security";
+    private static String COLUMN_NAME_WAON = "waon";
+    private static String COLUMN_NAME_SECURITY = "security";
     private static String COLUMN_NAME_STORE_ID = "store_id";
     private static String COLUMN_NAME_POINTS = "point";
 
@@ -65,6 +65,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     COLUMN_NAME_USER_ID + " TEXT PRIMARY KEY," +
                     COLUMN_NAME_LOGIN_ID + " TEXT," +
                     COLUMN_NAME_NAME + " TEXT," +
+                    COLUMN_NAME_WAON + " TEXT," +
+                    COLUMN_NAME_SECURITY + " TEXT," +
                     COLUMN_NAME_POINTS + " INTEGER," +
                     COLUMN_NAME_STORE_ID + " TEXT)";
 
@@ -105,7 +107,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    private void deleteTable(SQLiteDatabase db) {
+    private void deleteTable(SQLiteDatabase db ) {
         try{
             db.execSQL(SQL_DELETE_ENTRIES);
             db.execSQL(SQL_DELETE_USERS);
@@ -114,6 +116,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } finally {
             Log.d("debug", "all table delete sccess");
         }
+    }
+
+    public boolean checkUserData(SQLiteDatabase db,String login_id,String waon,String security){
+        String UserID = null;
+        Cursor cursor = null;
+        try{
+            Log.d("debug","checking user_id data...." + login_id + " + " + waon +" + " + security);
+            cursor = db.query(
+                    "users",
+                    new String[] { "login_id","waon","security"} ,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+            );
+
+            cursor.moveToFirst();
+            if(login_id.equals(cursor.getString(0)) && waon.equals(cursor.getString(1)) && security.equals(cursor.getString(2))){
+                //認証成功
+                Log.d("debug","ユーザー情報認証に成功");
+                return true;
+            }
+            cursor.close();
+
+        }catch(SQLiteException e){
+            Log.d("debug","user get error" + e.getMessage());
+            return false;
+        }finally{
+           return false;
+        }
+
     }
 
     public String getUserID(SQLiteDatabase db){
@@ -130,7 +164,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     null,
                     null
             );
-
             cursor.moveToFirst();
 
             UserID = cursor.getString(0);

@@ -51,7 +51,8 @@
         <activity android:name=".RegistrationUserActivity" />
         <activity android:name=".FragmentTestActivity" />
         <activity android:name=".FavoriteShopActivity" />
-        <activity android:name=".ChangePasswordActivity"></activity>
+        <activity android:name=".ChangePasswordActivity" />
+        <activity android:name=".EnterPasswordActivity"></activity>
     </application>
 
 </manifest>

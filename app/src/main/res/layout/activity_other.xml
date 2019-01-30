@@ -31,13 +31,17 @@
             android:id="@+id/OtherButton1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/andoroid_100"
-            android:text="お気に入り店舗登録" />
+            android:onClick="TransitionFavoriteShopActivity"
+            android:text="お気に入り店舗登録"
+            tools:ignore="OnClick" />
 
         <Button
             android:id="@+id/OtherButton2"
             android:layout_width="match_parent"
             android:layout_height="@dimen/andoroid_100"
-            android:text="パスワードのリセット" />
+            android:text="パスワードのリセット"
+            android:onClick="TransitionChangePasswordActivity"
+            tools:ignore="OnClick" />
 
         <Button
             android:id="@+id/OtherButton3"
