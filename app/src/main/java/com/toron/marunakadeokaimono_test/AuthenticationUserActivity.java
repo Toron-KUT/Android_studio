@@ -1,5 +1,6 @@
 package com.toron.marunakadeokaimono_test;
 
+import android.app.Activity;
 import android.app.MediaRouteButton;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -26,11 +27,12 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AuthenticationUserActivity extends AppCompatActivity {
+public class AuthenticationUserActivity extends Activity {
     private DatabaseHelper helper;
     private SQLiteDatabase db;
     private RequestQueue mQueue;
-    private String PHPURL = "http://172.21.48.127/server_php/Toron_BackEnd/php/getLoginInfo.php";
+
+    private String PHPURL = "http://222.229.69.53/~goohira/toron/php/getLoginInfo.php";
     private EditText editTextUser, editTextPassword;
     private Map<String,String> mAuthenticationUserData;
 

@@ -58,6 +58,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     COLUMN_NAME_MONEY+ " INTEGER)";
 
     //ユーザテーブル作成文
+
+
     private static final String SQL_CREATE_USER =
             "CREATE TABLE " +  TABLE_NAME_USER + " (" +
                     COLUMN_NAME_USER_ID + " TEXT PRIMARY KEY," +
@@ -483,14 +485,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 do{
                     JSONObject mJSONObject = mJSONArray.getJSONObject(f);
 
-                    String mSpecialSale_ID = mJSONObject.getString("name");
+                    String mSpecialSale_ID = mJSONObject.getString("product_name");
                     String mSpecialSale_Name = mJSONObject.getString("price");
                     String mSpecialSale_Category = mJSONObject.getString("category_name");
                     Log.d("debug","mStore_Name ==  " + mSpecialSale_Name);
 
 
                     mSpecialSale = new HashMap<String,Object>();
-                    mSpecialSale.put("name",mSpecialSale_ID);
+                    mSpecialSale.put("product_name",mSpecialSale_ID);
                     mSpecialSale.put("price",mSpecialSale_Name);
                     mSpecialSale.put("category_name",mSpecialSale_Category);
                     mSpecialSaleList.add(mSpecialSale);

@@ -1,35 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
 
-    android:layout_height = "wrap_content"
-    android:layout_width="wrap_content">
-    <TextView
-        android:id="@+id/tableView_Favorite1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        android:background="@android:color/transparent"
-        />
-    <TextView
-        android:id="@+id/tableView_Favorite2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        android:background="@android:color/holo_red_light"
-        />
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:color="#00b489"
 
-    <Button
-        android:id="@+id/tableView_Favorite3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+
+    >
+
+    <LinearLayout
         android:layout_marginTop="8dp"
-        android:background="@android:color/darker_gray"
-        android:text="@string/Registration" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background ="@drawable/stroke_favorite"
+
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="1dp"
+        >
+
+
+        <TextView
+            android:id="@+id/tableView_Favorite1"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="5dp"
+
+
+            android:text="土佐山田とか"
+
+
+            android:textSize="18sp" />
+        <Space
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
+
+        <!--@android:color/transparent-->
+        <Button
+
+            android:id="@+id/tableView_Favorite2"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@null"
+
+            android:text="@string/Registration"
+
+            android:textSize="24sp" />
+
+        <Space
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
+    </LinearLayout>
 
 
 </TableRow>

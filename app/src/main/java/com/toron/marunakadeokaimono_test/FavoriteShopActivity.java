@@ -1,5 +1,6 @@
 package com.toron.marunakadeokaimono_test;
 
+import android.app.Activity;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,13 +23,13 @@ import org.json.JSONObject;
 import java.util.List;
 import java.util.Map;
 
-public class FavoriteShopActivity extends AppCompatActivity {
+public class FavoriteShopActivity extends Activity {
     private TextView mTextMessage;
     private TextView mFavoriteShopData_Store_Name;
     private DatabaseHelper helper;
     private SQLiteDatabase db;
     private RequestQueue mQueue;
-    private String PHPURL = "http://172.21.48.127/server_php/Toron_BackEnd/php/getStore.php";
+    private String PHPURL = "http://222.229.69.53/~goohira/toron/php/getStore.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,29 +124,24 @@ public class FavoriteShopActivity extends AppCompatActivity {
                 View view = getLayoutInflater().inflate(R.layout.tablelayout_favorite, table);
                 Log.d("debug","mFavoriteShopList.store_id == " + mFavoriteShop.get("store_id").toString());
 
-                int text_id = 10 * Integer.parseInt(mFavoriteShop.get("store_id").toString() + 1);
-                TextView mTextId = view.findViewById(R.id.tableView_Favorite1);
-                mTextId.setId(text_id);
 
-                int text_name = 10 * Integer.parseInt(mFavoriteShop.get("store_id").toString() + 2);
-                TextView mTextName = view.findViewById(R.id.tableView_Favorite2);
+
+                int text_name = 10 * Integer.parseInt(mFavoriteShop.get("store_id").toString() + 1);
+                TextView mTextName = view.findViewById(R.id.tableView_Favorite1);
                 mTextName.setId(text_name);
 
-                int text_button = 10 * Integer.parseInt(mFavoriteShop.get("store_id").toString() + 3);
-                TextView mButton = view.findViewById(R.id.tableView_Favorite3);
+                int text_button = 10 * Integer.parseInt(mFavoriteShop.get("store_id").toString() + 2);
+                TextView mButton = view.findViewById(R.id.tableView_Favorite2);
                 mButton.setId(text_button);
 
                 Log.d("debug","mFavoriteShopList.store_id == " + mFavoriteShop.get("name").toString());
 
-
                 //text.setText(mPurchaseHistory.get("name").toString());
                 // テキストを変更
-
-
                 //sbuilder_num.append(mPurchaseHistory.get("num").toString() + "\n");
                 //sbuilder_name.append(mPurchaseHistory.get("price").toString() + "\n");
                 //sbuilder_num.append(mPurchaseHistory.get("createDate").toString() + "\n");
-                mTextId.setText(mFavoriteShop.get("store_id").toString());
+                //mTextId.setText(mFavoriteShop.get("store_id").toString());
                 mTextName.setText(mFavoriteShop.get("name").toString());
 
 

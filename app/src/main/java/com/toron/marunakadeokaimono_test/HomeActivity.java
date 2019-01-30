@@ -11,8 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import com.toron.marunakadeokaimono_test.ui.fragmenttest.FragmentTestFragment;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements FragmentTestFragment.Callback{
+//public class HomeActivity extends AppCompatActivity{
+    private int count;
     private TextView mTextMessage;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -69,14 +72,24 @@ public class HomeActivity extends AppCompatActivity {
         button01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                count++;
+                //FragmentTestFragment fs = (FragmentTestFragment)getSupportFragmentManager().findFragmentById(R.id.container);
+                //fs.setText(String.valueOf(count));
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                //fragmentTransaction.replace(R.id.container, new TestFragment());
+                // BackStackを設定
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.replace(R.id.container,FragmentTestFragment.newInstance("神"));
                 fragmentTransaction.commit();
 
             }
         });
 
 
+    }
+
+    @Override
+    public void onFragmentButtonClick(String string){
+        ((TextView)findViewById(R.id.fragment_text1)).setText(string);
     }
 }

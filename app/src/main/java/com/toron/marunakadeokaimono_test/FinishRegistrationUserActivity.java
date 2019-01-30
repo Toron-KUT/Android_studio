@@ -33,7 +33,7 @@ public class FinishRegistrationUserActivity extends AppCompatActivity {
     private SQLiteDatabase db;
     private RequestQueue mQueue;
     private  Map<String, String> params;
-    private String PHPURL = "http://172.21.48.127/server_php/Toron_BackEnd/php/insertNewUser.php";
+    private String PHPURL = "http://222.229.69.53/~goohira/toron/php/insertNewUser.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

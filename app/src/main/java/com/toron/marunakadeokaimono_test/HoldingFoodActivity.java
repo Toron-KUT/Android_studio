@@ -1,5 +1,6 @@
 package com.toron.marunakadeokaimono_test;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -29,7 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HoldingFoodActivity extends AppCompatActivity {
+public class HoldingFoodActivity extends Activity {
 
     private TextView mTextMessage;
     private TextView mHoldingFoodData_Product_Name;
@@ -38,7 +39,7 @@ public class HoldingFoodActivity extends AppCompatActivity {
     private DatabaseHelper helper;
     private SQLiteDatabase db;
     private RequestQueue mQueue;
-    private String PHPURL = "http://172.21.48.127/server_php/Toron_BackEnd/php/getHoldingFood.php";
+    private String PHPURL = "http://222.229.69.53/~goohira/toron/php/getHoldingFood.php";
     // private String PHPURL =   "http://172.21.48.127/server_php/Toron_BackEnd/php/getStore.php";
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -49,19 +50,19 @@ public class HoldingFoodActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     TransitionHoldingFoodActivity();
-                    mTextMessage.setText(R.string.title_home);
+                    //mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_dashboard:
                     TransitionPurchaseHistoryActivity();
-                    mTextMessage.setText(R.string.title_dashboard);
+                    //mTextMessage.setText(R.string.title_dashboard);
                     return true;
                 case R.id.navigation_notifications:
                     TransitionSpecialSaleActivity();
-                    mTextMessage.setText(R.string.title_notifications);
+                    //mTextMessage.setText(R.string.title_notifications);
                     return true;
                 case R.id.navigation_other:
                     TransitionOtherActivity();
-                    mTextMessage.setText(R.string.title_other);
+                    //mTextMessage.setText(R.string.title_other);
                     return true;
             }
             return false;
@@ -93,15 +94,16 @@ public class HoldingFoodActivity extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        GetHoldingFoodData();
 
-        Button readButton = findViewById(R.id.button5);
-        readButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                GetHoldingFoodData();
-
-            }
-        });
+        //Button readButton = findViewById(R.id.button5);
+        //readButton.setOnClickListener(new View.OnClickListener() {
+       //     @Override
+        //    public void onClick(View v) {
+         //       GetHoldingFoodData();
+//
+         //   }
+        //});
     }
 
     private void GetHoldingFoodData(){
@@ -229,6 +231,7 @@ public class HoldingFoodActivity extends AppCompatActivity {
 
                 Log.d("debug", "i= " + i);
             }
+
 
             Log.d("debug","mHoldingFoodList.size=" + mHoldingFoodList.size());
 

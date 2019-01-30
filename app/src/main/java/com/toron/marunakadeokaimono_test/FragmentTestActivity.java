@@ -13,7 +13,7 @@ public class FragmentTestActivity extends AppCompatActivity {
         setContentView(R.layout.fragment_test_activity);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, FragmentTestFragment.newInstance())
+                    .replace(R.id.container, FragmentTestFragment.newInstance("Fragment"))
                     .commitNow();
         }
     }

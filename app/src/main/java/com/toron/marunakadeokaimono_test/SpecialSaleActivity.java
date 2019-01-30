@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -27,13 +28,16 @@ import org.json.JSONObject;
 import java.util.List;
 import java.util.Map;
 
-public class SpecialSaleActivity extends AppCompatActivity {
+import android.app.Activity;
+
+//public class SpecialSaleActivity extends AppCompatActivity {
+public class SpecialSaleActivity extends Activity {
     private TextView mTextMessage;
     private TextView mSpecialSaleData_Store_Name;
     private DatabaseHelper helper;
     private SQLiteDatabase db;
     private RequestQueue mQueue;
-    private String PHPURL = "http://172.21.48.127/server_php/Toron_BackEnd/php/getSpecialSale.php";
+    private String PHPURL = "http://222.229.69.53/~goohira/toron/php/getSpecialSale.php";
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -174,25 +178,24 @@ public class SpecialSaleActivity extends AppCompatActivity {
                 View view = getLayoutInflater().inflate(R.layout.tablelayout_specialsale, table);
 
 
-                int text_name = 10 * i + 1;
-                TextView mTextName = view.findViewById(R.id.tableView_SpecialSale1);
+                int text_Img = 10 * i + 1;
+                ImageView mImageView = view.findViewById(R.id.SpecialSale_Img1);
+                mImageView.setId(text_Img);
+
+                int text_name =10 * i + 2;
+                TextView mTextName = view.findViewById(R.id.SpecialSale_Name1);
                 mTextName.setId(text_name);
 
-                int text_price =10 * i + 2;
-                TextView mTextPrice = view.findViewById(R.id.tableView_SpecialSale2);
-                mTextPrice.setId(text_price);
+                int text_Price = 10 * i + 3;
+                TextView mTextPrice = view.findViewById(R.id.SpecialSale_Price1);
+                mTextPrice.setId(text_Price);
 
-                int text_Category = 10 * i + 3;
-                TextView mTextCategory = view.findViewById(R.id.tableView_SpecialSale3);
-                mTextCategory.setId(text_Category);
+                Log.d("debug","mSpecialSaleList.store_id == " + mSpecialSale.get("product_name").toString());
 
-                Log.d("debug","mSpecialSaleList.store_id == " + mSpecialSale.get("name").toString());
 
-                
-                mTextName.setText(mSpecialSale.get("name").toString());
-                mTextPrice.setText(mSpecialSale.get("price").toString());
-                mTextCategory.setText(mSpecialSale.get("category_name").toString());
-
+                mImageView.setImageResource((R.drawable.marunaka));
+                mTextName.setText(mSpecialSale.get("product_name").toString());
+                mTextPrice.setText(mSpecialSale.get("price").toString()+"円");
 
                 Log.d("debug", "i= " + i);
                 //Log.d("debug", " mPurchaseHistoryData_User_ID  ==" + sbuilder_name.toString());

@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DisplayMessageActivity">
+    tools:context=".DisplayMessageActivity"
+    android:background="@color/colorPink">
 
-   
 
     <TextView
         android:id="@+id/textView12"
@@ -15,12 +15,15 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:text="以下の情報で登録します．よろしいですか？"
+        android:text="登録情報"
+        android:textColor="#ffffff"
+
+        android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,48 +35,211 @@
         android:showDividers="middle"
         app:layout_constraintTop_toBottomOf="@+id/textView35">
 
-        <TextView
-            android:id="@+id/DisplayMessageTextView1"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/android_50"
-            android:text="ログインID" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/DisplayMessageTextView2"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/android_50"
-            android:inputType="textPassword"
-            android:text="aaaa" />
+            <View
+                android:id="@+id/view"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/stroke"
+                />
 
-        <TextView
-            android:id="@+id/DisplayMessageTextView3"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/android_50"
-            android:text="氏名" />
+            <TextView
+                android:id="@+id/login_idText"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="135dp"
+                android:layout_marginTop="41dp"
+                android:background="@color/colorPink"
+                android:gravity="center_horizontal"
+                android:text="ログインID"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/DisplayMessageTextView4"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/android_50"
-            android:text="ルビ" />
+            <TextView
+                android:id="@+id/DisplayMessageTextView1"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="65dp"
+                android:background="@color/colorPink"
+                android:gravity="center_horizontal"
+                android:text="ログインID"
+                android:textColor="@color/colorDark" />
 
-        <TextView
-            android:id="@+id/DisplayMessageTextView5"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/android_50"
-            android:text="WAON番号" />
+            <View
+                android:id="@+id/view2"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="110dp"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/stroke"/>
 
-        <TextView
-            android:id="@+id/DisplayMessageTextView6"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/android_50"
-            android:text="セキュリティコード" />
+            <TextView
+                android:id="@+id/pass_text"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="135dp"
+                android:layout_marginTop="101dp"
+                android:background="@color/colorPink"
+                android:gravity="center_horizontal"
+                android:text="パスワード"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#ffffff" />
 
-        <Button
-            android:id="@+id/DisplayMessageButton1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="登録へ" />
+            <TextView
+                android:id="@+id/DisplayMessageTextView2"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="125dp"
+                android:gravity="center_horizontal"
+                android:inputType="textPassword"
+                android:text="aaaa"
+                android:textColor="@color/colorDark" />
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="350dp"
+                android:layout_height="90dp"
+                android:layout_marginTop="170dp"
+                android:layout_marginStart="15dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:background="@drawable/stroke"/>
+
+            <TextView
+                android:id="@+id/name_text"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="161dp"
+                android:layout_marginStart="165dp"
+                android:background="@color/colorPink"
+                android:gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#ffffff"
+                android:text="氏名" />
+
+            <TextView
+                android:id="@+id/DisplayMessageTextView3"
+                android:layout_width="320dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="230dp"
+                android:gravity="center_horizontal"
+
+                android:text="氏名"
+                android:textColor="@color/colorDark" />
+
+
+            <TextView
+                android:id="@+id/kana_text"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+
+                android:layout_marginTop="192dp"
+                android:background="@color/colorPink"
+                android:gravity="center_horizontal"
+                android:text="フリガナ:"
+                android:textColor="@color/colorDark"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/DisplayMessageTextView4"
+                android:layout_width="320dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="192dp"
+                android:gravity="center_horizontal"
+                android:text="ルビ"
+                android:textColor="@color/colorDark" />
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="278dp"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/stroke"/>
+
+            <TextView
+                android:id="@+id/waon_text"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="269dp"
+                android:layout_marginStart="135dp"
+                android:textColor="#ffffff"
+                android:background="@color/colorPink"
+                android:gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="WAON番号" />
+
+            <TextView
+                android:id="@+id/DisplayMessageTextView5"
+                android:layout_width="320dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="300dp"
+                android:gravity="center_horizontal"
+                android:text="WAON番号"
+                android:textColor="@color/colorDark" />
+
+            <View
+                android:id="@+id/view6"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="340dp"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/stroke"/>
+
+            <TextView
+                android:id="@+id/sec_text"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="329dp"
+                android:background="@color/colorPink"
+                android:layout_marginStart="90dp"
+                android:textColor="#ffffff"
+                android:gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="セキュリティーコード" />
+
+            <TextView
+                android:id="@+id/DisplayMessageTextView6"
+                android:layout_width="330dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="355dp"
+                android:gravity="center_horizontal"
+                android:text="セキュリティコード"
+                android:textColor="@color/colorDark" />
+
+            <Button
+                android:id="@+id/DisplayMessageButton1"
+                android:layout_width="90dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="145dp"
+
+                android:layout_marginTop="425dp"
+
+                android:text="登録"
+                android:background="@drawable/stroke"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#ffffff" />
+        </FrameLayout>
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

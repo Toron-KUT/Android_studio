@@ -38,7 +38,7 @@ public class PurchaseHistroryActivity extends AppCompatActivity {
     private DatabaseHelper helper;
     private SQLiteDatabase db;
     private RequestQueue mQueue;
-    private String PHPURL = "http://172.21.48.127/server_php/Toron_BackEnd/php/getPurchaseHistory.php";
+    private String PHPURL = "http://222.229.69.53/~goohira/toron/php/getPurchaseHistory.php";
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {

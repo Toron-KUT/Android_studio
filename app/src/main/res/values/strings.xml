@@ -12,6 +12,7 @@
     <string name="buttun_send">Send</string>
 
     <string name="null_string">null</string>
+    <string name="app_price">0円</string>
 
 
     <string name="hint_key">company</string>
@@ -24,4 +25,7 @@
     <string name="Authentication">ログイン　</string>
     <string name="title_activity_purchase_histrory">PurchaseHistroryActivity</string>
     <string name="Registration">登録</string>
+    <string name="Special">お得</string>
+    <string name="PuchaseHistory">履歴</string>
+    <string name="HoldingFood">保有</string>
 </resources>
