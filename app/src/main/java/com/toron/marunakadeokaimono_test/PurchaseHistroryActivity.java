@@ -92,14 +92,14 @@ public class PurchaseHistroryActivity extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        Button readButton = findViewById(R.id.button10);
-        readButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                GetPurchaseHistoryData();
+        //Button readButton = findViewById(R.id.button10);
+        //readButton.setOnClickListener(new View.OnClickListener() {
+        //    @Override
+        //    public void onClick(View v) {
+        GetPurchaseHistoryData();
 
-            }
-        });
+        //    }
+        //});
     }
 
     private void GetPurchaseHistoryData() {

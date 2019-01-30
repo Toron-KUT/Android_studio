@@ -3,42 +3,48 @@
 
     android:layout_height = "wrap_content"
     android:layout_width="wrap_content">
+
     <TextView
         android:id="@+id/tableView_Purchase1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="71.5pt"
+        android:layout_height="50dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/stroke_list"
+
         android:text="TextView"
-        android:background="@android:color/holo_red_light"
-    />
+        android:textSize="18sp" />
+
     <TextView
         android:id="@+id/tableView_Purchase2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="31.5pt"
+        android:layout_height="50dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/stroke_list"
         android:text="TextView"
-        android:background="@android:color/holo_red_light"
-        />
+        android:textSize="18sp" />
+
     <TextView
         android:id="@+id/tableView_Purchase3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="11.5pt"
+        android:layout_height="50dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/stroke_list"
+
         android:text="TextView"
-        android:background="@android:color/holo_red_light"
-        />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tableView_Purchase4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="51.5pt"
+        android:layout_height="50dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/stroke_list"
+
         android:text="TextView"
-        android:background="@android:color/holo_red_light"
-        />
+        android:textSize="18sp" />
 
 </TableRow>
