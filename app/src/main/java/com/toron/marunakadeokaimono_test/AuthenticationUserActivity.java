@@ -157,7 +157,6 @@ public class AuthenticationUserActivity extends Activity {
         startActivity(intent);
 
     }
-
     public void  SuccessAuthenticationUser(JSONArray mJSONArray){
         boolean success = helper.SetAuthenticationUserData(mJSONArray,db);
 

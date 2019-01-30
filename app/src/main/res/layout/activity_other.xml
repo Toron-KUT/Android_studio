@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OtherActivity">
+    tools:context=".OtherActivity"
+    android:background="@color/colorPink">
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
@@ -31,23 +32,28 @@
             android:id="@+id/OtherButton1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/andoroid_100"
-            android:onClick="TransitionFavoriteShopActivity"
+            android:background="@drawable/stroke_maru"
             android:text="お気に入り店舗登録"
-            tools:ignore="OnClick" />
+            android:textColor="#ffffff"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/OtherButton2"
             android:layout_width="match_parent"
             android:layout_height="@dimen/andoroid_100"
+            android:background="@drawable/stroke_maru"
             android:text="パスワードのリセット"
-            android:onClick="TransitionChangePasswordActivity"
-            tools:ignore="OnClick" />
+            android:textColor="#ffffff"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/OtherButton3"
             android:layout_width="match_parent"
             android:layout_height="@dimen/andoroid_100"
-            android:text="ログアウト" />
+            android:background="@drawable/stroke_maru"
+            android:text="ログアウト"
+            android:textColor="#ffffff"
+            android:textSize="30sp" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

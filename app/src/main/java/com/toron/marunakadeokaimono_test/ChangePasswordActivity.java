@@ -44,7 +44,7 @@ public class ChangePasswordActivity extends Activity {
                 ChangePasswordWaon = waonEditText.getText().toString();
                 EditText securityEditText = (EditText) findViewById(R.id.ChangePasswordEditText3);
                 ChangePasswordSecurity = securityEditText.getText().toString();
-                //Log.d("debug","checking user_id data...." + login_id + " + " + waon +" + " + security);
+
                 CheckUserData();
 
             }
@@ -61,6 +61,8 @@ public class ChangePasswordActivity extends Activity {
         }
         boolean success = helper.checkUserData(db,ChangePasswordID,ChangePasswordWaon,ChangePasswordSecurity);
         Log.d("debug","CheckUserData");
+        System.out.println(success);
+
         if(success == true){
             Toast.makeText(this,"ユーザー情報認証に成功しました",Toast.LENGTH_SHORT).show();
             Log.d("debug","ユーザー情報認証に成功しました");

@@ -122,10 +122,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String UserID = null;
         Cursor cursor = null;
         try{
-            Log.d("debug","checking user_id data...." + login_id + " + " + waon +" + " + security);
+
             cursor = db.query(
                     "users",
-                    new String[] { "login_id","waon","security"} ,
+                    new String[] {"login_id","waon","security"} ,
                     null,
                     null,
                     null,
@@ -133,19 +133,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     null
             );
 
+
             cursor.moveToFirst();
+            Log.d("debug","checking user_id data...." + login_id + " + " + waon +" + " + security);
+            Log.d("debug","+" +cursor.getString(0) + " " +cursor.getString(1) + " " + cursor.getString(2));
             if(login_id.equals(cursor.getString(0)) && waon.equals(cursor.getString(1)) && security.equals(cursor.getString(2))){
                 //認証成功
-                Log.d("debug","ユーザー情報認証に成功");
+                cursor.close();
+                Log.d("debug","ユーザ情報認証に成功!");
                 return true;
             }
-            cursor.close();
+            else{
+                cursor.close();
+                Log.d("debug","ユーザ情報認証に失敗!");
+                return false;
+            }
+
+
 
         }catch(SQLiteException e){
             Log.d("debug","user get error" + e.getMessage());
             return false;
-        }finally{
-           return false;
         }
 
     }
@@ -327,6 +335,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put("user_id", mJSONObject.getString("user_id"));
             values.put("login_id", mJSONObject.getString("login_id"));
             values.put("name", mJSONObject.getString("name"));
+            values.put("waon", mJSONObject.getString("waon"));
+            values.put("security", mJSONObject.getString("security"));
             values.put("point", mJSONObject.getInt("point"));
             values.put("store_id", mJSONObject.getString("store_id"));
 

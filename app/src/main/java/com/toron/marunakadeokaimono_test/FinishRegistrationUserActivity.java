@@ -53,7 +53,7 @@ public class FinishRegistrationUserActivity extends AppCompatActivity {
 
 
         InsertNewUserData(params);
-        Button readButton = findViewById(R.id.FinishRegistrationUserbutton1);
+        Button readButton = findViewById(R.id.button);
 
         readButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,8 +210,8 @@ public class FinishRegistrationUserActivity extends AppCompatActivity {
     }
 
     private void DisplayFinishRegistration(String mMessage){
-        final TextView id = findViewById(R.id.FinishRegistrationUserTextView1);
-        id.setText(mMessage);
+        //final TextView id = findViewById(R.id.FinishRegistrationUserTextView1);
+        //id.setText(mMessage);
     }
 
     private void GoAuthenticationUser(){
