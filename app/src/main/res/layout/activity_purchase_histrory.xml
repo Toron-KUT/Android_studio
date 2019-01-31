@@ -21,7 +21,6 @@
             tools:ignore="MissingConstraints">
 
 
-
             <TextView
                 android:id="@+id/TopBar_Name"
                 android:layout_width="wrap_content"
@@ -29,7 +28,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/grad"
                 android:paddingVertical="15dp"
-                android:text="ようこそ佐藤さん"
+                android:text="ようこそゲストさん"
                 android:textSize="18sp" />
 
             <TextView

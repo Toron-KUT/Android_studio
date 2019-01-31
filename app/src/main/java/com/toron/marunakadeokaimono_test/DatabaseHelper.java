@@ -67,7 +67,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     COLUMN_NAME_NAME + " TEXT," +
                     COLUMN_NAME_WAON + " TEXT," +
                     COLUMN_NAME_SECURITY + " TEXT," +
-                    COLUMN_NAME_POINTS + " INTEGER," +
+                    COLUMN_NAME_POINTS + " TEXT," +
                     COLUMN_NAME_STORE_ID + " TEXT)";
 
     //保有食品テーブルを作成
@@ -157,6 +157,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
     }
+    //public String changeIDtoPhoto(String s){
+
+     //   return id;
+    //}
 
     public String getUserID(SQLiteDatabase db){
         String UserID = null;
@@ -186,6 +190,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return UserID;
         }
 
+    }
+    public Map<String,String> setTopBar(SQLiteDatabase db){
+        Map<String,String> map = null;
+        Cursor cursor = null;
+        try {
+
+            cursor = db.query(
+                    "users",
+                    new String[]{"name", "point"},
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+            );
+            cursor.moveToFirst();
+            Log.d("debug","kokomade");
+
+            String Name = cursor.getString(0);
+            map.put("name", Name);
+            String Point = cursor.getString(1);
+            map.put("point", Point);
+            cursor.close();
+            return map;
+        }catch(NullPointerException e){
+            return null;
+        }
     }
     public JSONArray getJSONArray(){
         return mArrayList;
@@ -337,7 +368,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put("name", mJSONObject.getString("name"));
             values.put("waon", mJSONObject.getString("waon"));
             values.put("security", mJSONObject.getString("security"));
-            values.put("point", mJSONObject.getInt("point"));
+            values.put("point", mJSONObject.getString("point"));
             values.put("store_id", mJSONObject.getString("store_id"));
 
             //nullの回避

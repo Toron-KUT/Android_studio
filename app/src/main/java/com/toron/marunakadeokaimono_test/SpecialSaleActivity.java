@@ -110,6 +110,15 @@ public class SpecialSaleActivity extends Activity {
                 db = helper.getReadableDatabase();
 
             }
+            //タイトルに格納
+            //Map<String,String> map = helper.setTopBar(db);
+            //Log.d("debug","げっと完了");
+            //TextView vi = findViewById(R.id.TopBar_Name);
+            //vi.setText("ようこそ　" +map.get("name")+"さん");
+            //TextView v2 = findViewById(R.id.TopBar_Point);
+            //v2.setText("所有ポイント " + map.get("point"));
+
+
             //通信の発行
             mQueue = Volley.newRequestQueue(this);
             String POST_URL = PHPURL;
@@ -173,29 +182,65 @@ public class SpecialSaleActivity extends Activity {
 
 
             for (int i = 1; i <=  mSpecialSaleList.size(); i++) {
-                Map<String, Object> mSpecialSale = mSpecialSaleList.get(i-1);
+                    Map<String, Object> mSpecialSale = mSpecialSaleList.get(i-1);
 
-                View view = getLayoutInflater().inflate(R.layout.tablelayout_specialsale, table);
-
-
-                int text_Img = 10 * i + 1;
-                ImageView mImageView = view.findViewById(R.id.SpecialSale_Img1);
-                mImageView.setId(text_Img);
-
-                int text_name =10 * i + 2;
-                TextView mTextName = view.findViewById(R.id.SpecialSale_Name1);
-                mTextName.setId(text_name);
-
-                int text_Price = 10 * i + 3;
-                TextView mTextPrice = view.findViewById(R.id.SpecialSale_Price1);
-                mTextPrice.setId(text_Price);
-
-                Log.d("debug","mSpecialSaleList.store_id == " + mSpecialSale.get("product_name").toString());
+                    View view = getLayoutInflater().inflate(R.layout.tablelayout_specialsale, table);
 
 
-                mImageView.setImageResource((R.drawable.marunaka));
-                mTextName.setText(mSpecialSale.get("product_name").toString());
-                mTextPrice.setText(mSpecialSale.get("price").toString()+"円");
+                    int text_Img = 10 * i + 1;
+                    ImageView mImageView = view.findViewById(R.id.SpecialSale_Img1);
+                    mImageView.setId(text_Img);
+
+                    int text_name =10 * i + 2;
+                    TextView mTextName = view.findViewById(R.id.SpecialSale_Name1);
+                    mTextName.setId(text_name);
+
+                    int text_Price = 10 * i + 3;
+                    TextView mTextPrice = view.findViewById(R.id.SpecialSale_Price1);
+                    mTextPrice.setId(text_Price);
+
+                    Log.d("debug","mSpecialSaleList.store_id == " + mSpecialSale.get("product_name").toString());
+
+                    //String ID = helper.changeIDtoPhoto();
+                    if(mSpecialSale.get("category_name").toString().equals("野菜・果物")) {
+                        mImageView.setImageResource((R.drawable.vegetables));
+                    }
+                    else if(mSpecialSale.get("category_name").toString().equals("肉・卵")) {
+                        mImageView.setImageResource((R.drawable.meat));
+                    }
+                    else if(mSpecialSale.get("category_name").toString().equals("魚介類")) {
+                        mImageView.setImageResource((R.drawable.fish));
+                    }
+                    else if(mSpecialSale.get("category_name").toString().equals("米・パン・粉類")) {
+                        mImageView.setImageResource((R.drawable.bread));
+                    }
+                    else if(mSpecialSale.get("category_name").toString().equals("乳製品")) {
+                        mImageView.setImageResource((R.drawable.milk));
+                    }
+                    else if(mSpecialSale.get("category_name").toString().equals("惣菜")) {
+                        mImageView.setImageResource((R.drawable.sidedish));
+                    }
+                    else if(mSpecialSale.get("category_name").toString().equals("インスタント・レトルト")) {
+                        mImageView.setImageResource((R.drawable.instant));
+                    }
+                    else if(mSpecialSale.get("category_name").toString().equals("菓子・冷凍")) {
+                        mImageView.setImageResource((R.drawable.kasi));
+                    }
+                    else if(mSpecialSale.get("category_name").toString().equals("飲料水")) {
+                        mImageView.setImageResource((R.drawable.drink));
+                    }
+                    else if(mSpecialSale.get("category_name").toString().equals("その他(食品)")) {
+                        mImageView.setImageResource((R.drawable.other));
+                    }
+                    else{
+                        mImageView.setImageResource((R.drawable.marunaka));
+                }
+
+
+                    //mImageView.setImageResource((R.drawable.marunaka));
+                    mTextName.setText(mSpecialSale.get("product_name").toString());
+                    mTextPrice.setText(mSpecialSale.get("price").toString()+"円");
+
 
                 Log.d("debug", "i= " + i);
                 //Log.d("debug", " mPurchaseHistoryData_User_ID  ==" + sbuilder_name.toString());

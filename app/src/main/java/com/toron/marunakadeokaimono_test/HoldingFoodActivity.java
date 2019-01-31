@@ -233,6 +233,8 @@ public class HoldingFoodActivity extends Activity {
                 mTextName.setText(mHoldingFood.get("name").toString());
                 mTextPrice.setText(mHoldingFood.get("num").toString());
                 mTextCategory.setText(mHoldingFood.get("createDate").toString());
+                Map<String,Object> list = new HashMap<String,Object>();
+                list.put("")
 
 
                 Log.d("debug", "i= " + i);

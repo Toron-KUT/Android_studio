@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class OtherActivity extends AppCompatActivity {
     private TextView mTextMessage;
@@ -79,6 +80,13 @@ public class OtherActivity extends AppCompatActivity {
                 TransitionChangePasswordActivity();
             }
         });
+        Button DeleteButton = findViewById(R.id.OtherButton3);
+        DeleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TransitionAuthenticationdActivity();
+            }
+        });
 
     }
     public void TransitionFavoriteShopActivity() {
@@ -87,6 +95,11 @@ public class OtherActivity extends AppCompatActivity {
     }
     public void TransitionChangePasswordActivity() {
         Intent intent = new Intent(this, ChangePasswordActivity.class);
+        startActivity(intent);
+    }
+    public void TransitionAuthenticationdActivity() {
+        Intent intent = new Intent(this, AuthenticationUserActivity.class);
+        Toast.makeText(this,"ログアウトしました．",Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }
 }

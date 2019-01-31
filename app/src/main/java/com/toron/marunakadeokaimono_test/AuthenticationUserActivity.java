@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -99,6 +100,7 @@ public class AuthenticationUserActivity extends AppCompatActivity {
 
                                 if (s.equals("false")) {
                                     Log.d("debug", "ユーザー認証に失敗しました");
+
                                     String Message = "ユーザー認証に失敗";
 
                                 } else {

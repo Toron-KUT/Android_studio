@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<Space
+android:layout_width="250dp"
+android:layout_height="wrap_content" />
+<FrameLayout
+android:id="@+id/SpecialSale_l"
+android:layout_width="wrap_content"
+android:layout_height="120dp"
+android:layout_gravity="left"
+android:layout_marginStart="10dp"
+android:background="@drawable/stroke_favorite"
+android:layout_marginBottom="40dp">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    <ImageView
+        android:id="@+id/SpecialSale_Img1"
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/marunaka"
+        />
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"/>
+    <LinearLayout
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/SpecialSale_Name1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="商品(左)"
+            android:textSize="24sp"
+            android:textColor="@android:color/black"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/black" />
+        <TextView
+            android:id="@+id/SpecialSale_Price1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/app_price"
+            android:textSize="24sp"
+            android:textColor="@android:color/black"/>
+    </LinearLayout>
+</LinearLayout>
+</FrameLayout>
+</TableRow>

@@ -1,50 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_height = "wrap_content"
     android:layout_width="match_parent">
 
-    <TextView
-        android:id="@+id/tableView_Purchase1"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
         android:background="@drawable/stroke_list"
+        android:layout_weight="10">
 
-        android:text="TextView"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/tableView_Purchase1"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
 
-    <TextView
-        android:id="@+id/tableView_Purchase2"
-        android:layout_width="31.5pt"
-        android:layout_height="50dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/stroke_list"
-        android:text="TextView"
-        android:textSize="18sp" />
+            android:text="TextView"
+            android:gravity="center_vertical"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/tableView_Purchase3"
-        android:layout_width="11.5pt"
-        android:layout_height="50dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/stroke_list"
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="#000000" />
 
-        android:text="TextView"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/tableView_Purchase2"
+            android:layout_width="31pt"
+            android:layout_height="50dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="10dp"
 
-    <TextView
-        android:id="@+id/tableView_Purchase4"
-        android:layout_width="51.5pt"
-        android:layout_height="50dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/stroke_list"
+            android:text="TextView"
+            android:textSize="18sp" />
 
-        android:text="TextView"
-        android:textSize="18sp" />
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="#000000" />
+
+        <TextView
+            android:id="@+id/tableView_Purchase3"
+            android:layout_width="12pt"
+            android:layout_height="50dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="10dp"
+
+            android:text="TextView"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="#000000" />
+
+        <TextView
+            android:id="@+id/tableView_Purchase4"
+            android:layout_width="wrap_content"
+            android:layout_height="54dp"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="3dp"
+
+            android:text="TextView"
+            android:textSize="18sp" />
+    </LinearLayout>
 
 </TableRow>
