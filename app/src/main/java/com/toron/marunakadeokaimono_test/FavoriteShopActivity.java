@@ -20,15 +20,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FavoriteShopActivity extends Activity {
+public class FavoriteShopActivity extends AppCompatActivity  implements View.OnClickListener{
     private TextView mTextMessage;
     private TextView mFavoriteShopData_Store_Name;
     private DatabaseHelper helper;
     private SQLiteDatabase db;
     private RequestQueue mQueue;
+    private Map<String,String> mFavoriteShopData;
     private String PHPURL = "http://222.229.69.53/~goohira/toron/php/getStore.php";
 
     @Override
@@ -104,7 +106,7 @@ public class FavoriteShopActivity extends Activity {
     private void DisplayFavoriteShop(List<Map<String,Object>> mFavoriteShopList) {
         try {
             ViewGroup table = (ViewGroup) findViewById(R.id.table_Favorite);
-            Log.d("debug","mFavoriteShopList.size == " +  mFavoriteShopList.size());
+            Log.d("debug", "mFavoriteShopList.size == " + mFavoriteShopList.size());
 
             // 行を追加
             //mPurchaseHistoryData_name = findViewById(R.id.textView30);
@@ -122,8 +124,7 @@ public class FavoriteShopActivity extends Activity {
                 Map<String, Object> mFavoriteShop = mFavoriteShopList.get(i);
 
                 View view = getLayoutInflater().inflate(R.layout.tablelayout_favorite, table);
-                Log.d("debug","mFavoriteShopList.store_id == " + mFavoriteShop.get("store_id").toString());
-
+                Log.d("debug", "mFavoriteShopList.store_id == " + mFavoriteShop.get("store_id").toString());
 
 
                 int text_name = 10 * Integer.parseInt(mFavoriteShop.get("store_id").toString() + 1);
@@ -134,7 +135,7 @@ public class FavoriteShopActivity extends Activity {
                 TextView mButton = view.findViewById(R.id.tableView_Favorite2);
                 mButton.setId(text_button);
 
-                Log.d("debug","mFavoriteShopList.store_id == " + mFavoriteShop.get("name").toString());
+                Log.d("debug", "mFavoriteShopList.store_id == " + mFavoriteShop.get("name").toString());
 
                 //text.setText(mPurchaseHistory.get("name").toString());
                 // テキストを変更
@@ -146,10 +147,10 @@ public class FavoriteShopActivity extends Activity {
                 //ボタンの挙動実装したい
 
 
-
                 Log.d("debug", "i= " + i);
                 //Log.d("debug", " mPurchaseHistoryData_User_ID  ==" + sbuilder_name.toString());
             }
+            //settingButton(mFavoriteShopList);
 
 
             Log.d("debug", "mFavoriteShop.size=" + mFavoriteShopList.size());
@@ -158,5 +159,34 @@ public class FavoriteShopActivity extends Activity {
             Log.d("debug", "Display FavoriteShop null poirnt exception " + e.getMessage());
         }
     }
+    private void settingButton(final List<Map<String,Object>> mFavoriteShopList) {
+        try{
+            for(int i=1;i<=mFavoriteShopList.size();i++) {
+                // display_menu_listからメニュー情報を取得
+                final Map<String, Object> mFavoriteShop = mFavoriteShopList.get(i - 1);
+                Log.d("debug"," " + mFavoriteShopList.size());
+                findViewById(i * 10 + 4).setOnClickListener(this);
+                findViewById(i * 10 + 4).setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        Log.d("debug","クリックされました " + v.getId() + " " +mFavoriteShop.get("name").toString());
+                        mFavoriteShopData = new HashMap<String,String>();
+                        mFavoriteShopData.put("product_name", mFavoriteShop.get("name").toString());
+                        mFavoriteShopData.put("createDate", mFavoriteShop.get("createDate").toString());
+
+                        //UpdateShop();
+                        return true;
+                    }
+                });
+            }
+        }catch(ClassCastException e){
+            Log.d("debug","error for " + e.getMessage());
+        }
+    }
+    @Override
+    public void onClick(View view) {
+
+    }
+
     
 }

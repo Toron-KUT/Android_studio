@@ -30,7 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HoldingFoodActivity extends Activity {
+public class HoldingFoodActivity extends AppCompatActivity  implements View.OnClickListener{
 
     private TextView mTextMessage;
     private TextView mHoldingFoodData_Product_Name;
@@ -96,6 +96,8 @@ public class HoldingFoodActivity extends Activity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         GetHoldingFoodData();
+
+
 
 
         //Button readButton = findViewById(R.id.button5);
@@ -224,8 +226,8 @@ public class HoldingFoodActivity extends Activity {
                 mTextCategory.setId(text_Category);
 
                 int DeleteButton = 10 * i + 4;
-                TextView mDeleteButton = view.findViewById(R.id.tableView_HoldingFood4);
-                mDeleteButton.setId(text_Category);
+                Button mDeleteButton = view.findViewById(R.id.tableView_HoldingFood4);
+                mDeleteButton.setId(DeleteButton);
 
                 Log.d("debug", "mHoldingFoodList.store_id == " + mHoldingFood.get("name").toString());
 
@@ -233,8 +235,8 @@ public class HoldingFoodActivity extends Activity {
                 mTextName.setText(mHoldingFood.get("name").toString());
                 mTextPrice.setText(mHoldingFood.get("num").toString());
                 mTextCategory.setText(mHoldingFood.get("createDate").toString());
-                Map<String,Object> list = new HashMap<String,Object>();
-                list.put("")
+                //Map<String,Object> list = new HashMap<String,Object>();
+
 
 
                 Log.d("debug", "i= " + i);
@@ -242,31 +244,37 @@ public class HoldingFoodActivity extends Activity {
 
 
             Log.d("debug","mHoldingFoodList.size=" + mHoldingFoodList.size());
-            //settingButton(mHoldingFoodList);
+            settingButton(mHoldingFoodList);
 
         }catch(NullPointerException e){
             Log.d("debug","DisplayHoldingFood null poirnt exception " + e.getMessage());
         }
     }
     private void settingButton(final List<Map<String,Object>> mHoldingFoodList) {
-        for(int i=0;i<mHoldingFoodList.size();i++){
-            // display_menu_listからメニュー情報を取得
-            final List<Map<String,Object>> sub_list = (List)mHoldingFoodList.get(i);
-            findViewById(i*10+3).setOnClickListener((View.OnClickListener) this);
-            findViewById(i*10+3).setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    mHoldingFoodData = null;
-                    mHoldingFoodData.put("product_name",sub_list.get(0).toString());
-                    mHoldingFoodData.put("createDate",sub_list.get(2).toString());
+        try{
+            for(int i=1;i<=mHoldingFoodList.size();i++) {
+                // display_menu_listからメニュー情報を取得
+                final Map<String, Object> mHoldingFood = mHoldingFoodList.get(i - 1);
+                Log.d("debug"," " + mHoldingFoodList.size());
+                findViewById(i * 10 + 4).setOnClickListener(this);
+                findViewById(i * 10 + 4).setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        Log.d("debug","クリックされました " + v.getId() + " " +mHoldingFood.get("name").toString());
+                        mHoldingFoodData = new HashMap<String,String>();
+                        mHoldingFoodData.put("product_name", mHoldingFood.get("name").toString());
+                        mHoldingFoodData.put("createDate", mHoldingFood.get("createDate").toString());
 
-                    Delete();
-                    return true;
-                }
-            });
+                        Delete();
+                        return true;
+                    }
+                });
+            }
+        }catch(ClassCastException e){
+            Log.d("debug","error for " + e.getMessage());
         }
     }
-    private void Delete(){
+    public void Delete(){
         try{
             if (helper == null) {
                 helper = new DatabaseHelper(getApplicationContext());
@@ -277,7 +285,7 @@ public class HoldingFoodActivity extends Activity {
             }
             //通信の発行
             mQueue = Volley.newRequestQueue(this);
-            String POST_URL = "http://222.229.69.53/~goohira/toron/php/getHoldingFood.php";
+            String POST_URL = "http://222.229.69.53/~goohira/toron/php/deleteHoldingFood.php";
             //Log.d("debug","URL for Holdingfood = " + POST_URL);
             StringRequest stringReq=new StringRequest(Request.Method.POST,POST_URL,
 
@@ -294,7 +302,8 @@ public class HoldingFoodActivity extends Activity {
                                 }
                                 else{
                                     Log.d("degug", "通信に成功しました 　結果 == " + mString);
-                                    GetHoldingFoodData();
+
+                                    resetHoldingFood();
 
                                 }
 
@@ -353,5 +362,13 @@ public class HoldingFoodActivity extends Activity {
 
 
     }
+    public void  resetHoldingFood(){
+        Intent intent = new Intent(this,HoldingFoodActivity.class);
+        startActivity(intent);
+    }
 
+    @Override
+    public void onClick(View view) {
+
+    }
 }
