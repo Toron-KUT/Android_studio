@@ -180,12 +180,15 @@ public class AuthenticationUserActivity extends AppCompatActivity {
             startActivity(intent);
 
         }
+        else{
+            Toast.makeText(this,"ログインに失敗しました",Toast.LENGTH_SHORT).show();
+        }
 
 
 
     }
     public void goRegistration(){
-        Toast.makeText(this,"ログインに失敗しました",Toast.LENGTH_SHORT).show();
+
         Intent intent = new Intent(this, RegistrationUserActivity.class);
         startActivity(intent);
     }

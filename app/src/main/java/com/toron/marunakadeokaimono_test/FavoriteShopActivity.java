@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -134,7 +135,7 @@ public class FavoriteShopActivity extends AppCompatActivity  implements View.OnC
                 mTextName.setId(text_name);
 
                 int text_button = 10 * Integer.parseInt(mFavoriteShop.get("store_id").toString() + 2);
-                TextView mButton = view.findViewById(R.id.tableView_Favorite2);
+                Button mButton = view.findViewById(R.id.tableView_Favorite2);
                 mButton.setId(text_button);
 
                 Log.d("debug", "mFavoriteShopList.store_id == " + mFavoriteShop.get("name").toString());
@@ -167,8 +168,8 @@ public class FavoriteShopActivity extends AppCompatActivity  implements View.OnC
                 // display_menu_listからメニュー情報を取得
                 final Map<String, Object> mFavoriteShop = mFavoriteShopList.get(i - 1);
                 Log.d("debug"," " + mFavoriteShopList.size());
-                findViewById(i * 10 + 4).setOnClickListener(this);
-                findViewById(i * 10 + 4).setOnLongClickListener(new View.OnLongClickListener() {
+                findViewById(i * 10 + 2).setOnClickListener(this);
+                findViewById(i * 10 + 2).setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
                         Log.d("debug","クリックされました " + v.getId() + " " +mFavoriteShop.get("name").toString());
