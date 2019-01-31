@@ -27,7 +27,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AuthenticationUserActivity extends Activity {
+public class AuthenticationUserActivity extends AppCompatActivity {
     private DatabaseHelper helper;
     private SQLiteDatabase db;
     private RequestQueue mQueue;

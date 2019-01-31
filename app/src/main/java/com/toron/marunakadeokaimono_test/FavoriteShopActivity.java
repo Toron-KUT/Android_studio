@@ -143,6 +143,8 @@ public class FavoriteShopActivity extends Activity {
                 //sbuilder_num.append(mPurchaseHistory.get("createDate").toString() + "\n");
                 //mTextId.setText(mFavoriteShop.get("store_id").toString());
                 mTextName.setText(mFavoriteShop.get("name").toString());
+                //ボタンの挙動実装したい
+
 
 
                 Log.d("debug", "i= " + i);

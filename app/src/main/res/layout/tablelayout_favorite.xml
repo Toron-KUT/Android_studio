@@ -23,9 +23,10 @@
 
         <TextView
             android:id="@+id/tableView_Favorite1"
-            android:layout_width="260dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="150dp"
             android:layout_marginTop="5dp"
 
 
@@ -45,7 +46,8 @@
             android:id="@+id/tableView_Favorite2"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:gravity="right"
+            android:layout_marginStart="-100dp"
             android:layout_marginTop="5dp"
             android:background="@null"
 

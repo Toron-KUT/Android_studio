@@ -49,7 +49,6 @@ android:background="@color/colorPink">
         android:layout_height="@dimen/android_50"
         android:layout_marginStart="16dp"
         android:layout_marginTop="-30dp"
-        android:text="ログインID"
         android:textColor="@color/colorUsuP"
         android:textSize="14sp" />
     <TextView
@@ -68,10 +67,9 @@ android:background="@color/colorPink">
 
         android:layout_width="match_parent"
         android:layout_height="@dimen/android_50"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="-20dp"
         android:inputType="textPassword"
-        android:text="aaaa"
         android:textColor="@color/colorUsuP"
         android:textSize="14sp" />
     <TextView
@@ -92,7 +90,6 @@ android:background="@color/colorPink">
         android:layout_height="@dimen/android_50"
         android:layout_marginStart="16dp"
         android:layout_marginTop="-20dp"
-        android:text="氏名"
         android:textColor="@color/colorUsuP"
         android:textSize="14sp" />
     <TextView
@@ -113,7 +110,6 @@ android:background="@color/colorPink">
         android:layout_height="@dimen/android_50"
         android:layout_marginStart="16dp"
         android:layout_marginTop="-20dp"
-        android:text="ルビ"
         android:textColor="@color/colorUsuP"
         android:textSize="14sp" />
     <TextView
@@ -133,7 +129,6 @@ android:background="@color/colorPink">
         android:layout_height="@dimen/android_50"
         android:layout_marginStart="16dp"
         android:layout_marginTop="-20dp"
-        android:text="WAON番号"
         android:textColor="@color/colorUsuP"
         android:textSize="14sp" />
     <TextView
@@ -155,7 +150,6 @@ android:background="@color/colorPink">
         android:layout_marginStart="16dp"
 
         android:layout_marginTop="-20dp"
-        android:text="セキュリティコード"
         android:textColor="@color/colorUsuP"
         android:textSize="14sp" />
 

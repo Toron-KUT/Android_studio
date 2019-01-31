@@ -39,6 +39,7 @@ public class HoldingFoodActivity extends Activity {
     private DatabaseHelper helper;
     private SQLiteDatabase db;
     private RequestQueue mQueue;
+    private Map<String,String> mHoldingFoodData;
     private String PHPURL = "http://222.229.69.53/~goohira/toron/php/getHoldingFood.php";
     // private String PHPURL =   "http://172.21.48.127/server_php/Toron_BackEnd/php/getStore.php";
 
@@ -95,6 +96,7 @@ public class HoldingFoodActivity extends Activity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         GetHoldingFoodData();
+
 
         //Button readButton = findViewById(R.id.button5);
         //readButton.setOnClickListener(new View.OnClickListener() {
@@ -221,6 +223,10 @@ public class HoldingFoodActivity extends Activity {
                 TextView mTextCategory = view.findViewById(R.id.tableView_HoldingFood3);
                 mTextCategory.setId(text_Category);
 
+                int DeleteButton = 10 * i + 4;
+                TextView mDeleteButton = view.findViewById(R.id.tableView_HoldingFood4);
+                mDeleteButton.setId(text_Category);
+
                 Log.d("debug", "mHoldingFoodList.store_id == " + mHoldingFood.get("name").toString());
 
 
@@ -234,10 +240,116 @@ public class HoldingFoodActivity extends Activity {
 
 
             Log.d("debug","mHoldingFoodList.size=" + mHoldingFoodList.size());
+            //settingButton(mHoldingFoodList);
 
         }catch(NullPointerException e){
             Log.d("debug","DisplayHoldingFood null poirnt exception " + e.getMessage());
         }
+    }
+    private void settingButton(final List<Map<String,Object>> mHoldingFoodList) {
+        for(int i=0;i<mHoldingFoodList.size();i++){
+            // display_menu_listからメニュー情報を取得
+            final List<Map<String,Object>> sub_list = (List)mHoldingFoodList.get(i);
+            findViewById(i*10+3).setOnClickListener((View.OnClickListener) this);
+            findViewById(i*10+3).setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    mHoldingFoodData = null;
+                    mHoldingFoodData.put("product_name",sub_list.get(0).toString());
+                    mHoldingFoodData.put("createDate",sub_list.get(2).toString());
+
+                    Delete();
+                    return true;
+                }
+            });
+        }
+    }
+    private void Delete(){
+        try{
+            if (helper == null) {
+                helper = new DatabaseHelper(getApplicationContext());
+            }
+            if (db == null) {
+                db = helper.getReadableDatabase();
+
+            }
+            //通信の発行
+            mQueue = Volley.newRequestQueue(this);
+            String POST_URL = "http://222.229.69.53/~goohira/toron/php/getHoldingFood.php";
+            //Log.d("debug","URL for Holdingfood = " + POST_URL);
+            StringRequest stringReq=new StringRequest(Request.Method.POST,POST_URL,
+
+                    //通信成功
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String s) {
+                            try{
+
+                                String mString = s;
+                                Log.d("degug", "通信に成功しました 　結果 == " + mString);
+                                if(mString.equals("false")) {
+                                    Log.d("debug","取得失敗");
+                                }
+                                else{
+                                    Log.d("degug", "通信に成功しました 　結果 == " + mString);
+                                    GetHoldingFoodData();
+
+                                }
+
+                                //List<Map<String,Object>> mArrayList = helper.GetHoldingFoodData(mJSONArray);
+                                //DisplayHoldingFood(mArrayList);
+                                //レスポンスが返ってきたらDisplayHoldingFood()を実行
+
+
+                            }catch(NullPointerException e){
+                                Log.d("degug","Nullpointエラー for HoldingFoodActivity " + e.getMessage());
+                            }
+
+                        }
+                    },
+
+                    //通信失敗
+                    new Response.ErrorListener(){
+                        @Override
+                        public void onErrorResponse(VolleyError error){
+                            Log.d("degug","通信に失敗しました " + error.getMessage());
+                        }
+                    }) {
+
+                //送信するデータを設定
+                @Override
+                protected Map<String, String> getParams() {
+                    //今回はUserIDを渡す
+
+
+
+                    String mUserID = helper.getUserID(db);
+                    //String mUserID = "12";
+                    Log.d("debug","getting UserID...   " + mUserID );
+                    mHoldingFoodData.put("user_id",mUserID);
+                    return mHoldingFoodData;
+
+                }
+            };
+            mQueue.add(stringReq);
+            //リクエストキューを発行
+
+
+
+
+            //List<Map<String,Object>> HoldingFoodList = helper.GetHoldingFoodData(helper,this);
+            //if(HoldingFoodList!=null){
+            //    Log.d("debug","HoldingFoodList success");
+            //    DisplayHoldingFood(HoldingFoodList);
+            //}
+            //else{
+            //    Log.d("debug","HoldingFoodList failed");
+            //}
+        }catch(NullPointerException e){
+            Log.d("debug"," null poirnt exception " + e.getMessage());
+        }
+
+
     }
 
 }

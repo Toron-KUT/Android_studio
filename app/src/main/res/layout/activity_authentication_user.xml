@@ -9,98 +9,164 @@
     android:background="@color/colorPink"
     >
 
-    <EditText
-        android:id="@+id/edit_text_User"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
-    <EditText
-        android:id="@+id/edit_text_Password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text_User" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/id_massage"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+            <TextView
+                android:id="@+id/textView333"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="マルナカdeお買い物♪"
+                android:textColor="#ffffffff"
+                android:textSize="36sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/pass_massage"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text_User" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="65dp"
+                android:gravity="center_horizontal"
+                android:text="便利にお得に簡単に&#x0A;マルナカ非公式お買い物サポートアプリ"
+                android:textColor="@color/colorUsuP"
+                android:textSize="12sp" />
 
-    <Button
-        android:id="@+id/AuthenticationUser1"
-        android:layout_width="wrap_content"
-        android:layout_height="47dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:text="@string/Authentication"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text_Password" />
+            <View
+                android:id="@+id/view999"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="170dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/stroke_last" />
 
-    <TextView
-        android:id="@+id/textView25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="IDとパスワードを入力してください"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="365dp"
-        android:layout_height="224dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/shopping_reji_gyouretsu" />
 
-    <Button
-        android:id="@+id/button8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Button"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text_Password" />
+            <EditText
+                android:id="@+id/edit_text_User"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="190dp"
+                android:layout_marginEnd="45dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:gravity="center_horizontal"
+                android:textColor="@color/colorDark"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+            <EditText
+                android:id="@+id/edit_text_Password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="250dp"
+                android:layout_marginEnd="45dp"
+                android:ems="10"
+                android:textColor="@color/colorDark"
+                android:gravity="center_horizontal"
+                android:inputType="textPassword"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_User" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="178dp"
+                android:textColor="#ffffffff"
+                android:text="ログインIDを入力してください"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="235dp"
+                android:textColor="#ffffffff"
+                android:text="パスワードを入力してください"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_User" />
+
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="-315dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.666"
+                app:layout_constraintStart_toStartOf="parent"
+
+                app:srcCompat="@drawable/ma2" />
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="135dp"
+                android:gravity="center_horizontal"
+                android:text="-IDとパスワードを入力してください-"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                android:id="@+id/AuthenticationUser1"
+                android:layout_width="138dp"
+                android:layout_height="47dp"
+                android:layout_marginTop="330dp"
+                android:layout_marginStart="230dp"
+                android:background="@drawable/stroke_maru"
+                android:text="さあ、はじめよう"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                />
+            <Button
+                android:id="@+id/AuthenticationUser2"
+                android:layout_width="wrap_content"
+                android:layout_height="47dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="330dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/stroke_maru"
+                android:text="ユーザー登録画面へ"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                />
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+
+
 </android.support.constraint.ConstraintLayout>

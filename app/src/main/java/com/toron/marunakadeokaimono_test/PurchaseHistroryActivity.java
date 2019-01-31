@@ -48,19 +48,19 @@ public class PurchaseHistroryActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     TransitionHoldingFoodActivity();
-                    mTextMessage.setText(R.string.title_home);
+                    //mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_dashboard:
                     TransitionPurchaseHistoryActivity();
-                    mTextMessage.setText(R.string.title_dashboard);
+                    //mTextMessage.setText(R.string.title_dashboard);
                     return true;
                 case R.id.navigation_notifications:
                     TransitionSpecialSaleActivity();
-                    mTextMessage.setText(R.string.title_notifications);
+                    //mTextMessage.setText(R.string.title_notifications);
                     return true;
                 case R.id.navigation_other:
                     TransitionOtherActivity();
-                    mTextMessage.setText(R.string.title_other);
+                    //mTextMessage.setText(R.string.title_other);
                     return true;
             }
             return false;
