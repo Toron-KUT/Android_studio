@@ -53,6 +53,15 @@ public class AuthenticationUserActivity extends AppCompatActivity {
 
             }
         });
+        Button goButton = findViewById(R.id.AuthenticationUser2);
+
+        goButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goRegistration();
+
+            }
+        });
     }
 
     private void AuthenticationUser() {
@@ -171,6 +180,10 @@ public class AuthenticationUserActivity extends AppCompatActivity {
 
 
 
+    }
+    public void goRegistration(){
+        Intent intent = new Intent(this, RegistrationUserActivity.class);
+        startActivity(intent);
     }
 
 }

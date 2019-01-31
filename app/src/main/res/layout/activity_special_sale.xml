@@ -7,7 +7,39 @@
     tools:context=".SpecialSaleActivity"
     android:background = "#F4FEBA"
     >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="-4dp"
+        tools:ignore="MissingConstraints">
 
+        <TextView
+            android:id="@+id/TopBar_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/grad"
+            android:paddingVertical="15dp"
+            android:text="ようこそ佐藤さん"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/TopBar_Point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/grad"
+            android:paddingVertical="15dp"
+            android:text="@string/app_name"
+            android:textSize="18sp" />
+    </LinearLayout>
 
 
     <ScrollView
@@ -22,6 +54,7 @@
 
         </TableLayout>
     </ScrollView>>
+    </LinearLayout>>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
