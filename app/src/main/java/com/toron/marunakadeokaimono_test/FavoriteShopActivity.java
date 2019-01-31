@@ -1,6 +1,7 @@
 package com.toron.marunakadeokaimono_test;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -150,7 +152,7 @@ public class FavoriteShopActivity extends AppCompatActivity  implements View.OnC
                 Log.d("debug", "i= " + i);
                 //Log.d("debug", " mPurchaseHistoryData_User_ID  ==" + sbuilder_name.toString());
             }
-            //settingButton(mFavoriteShopList);
+            settingButton(mFavoriteShopList);
 
 
             Log.d("debug", "mFavoriteShop.size=" + mFavoriteShopList.size());
@@ -171,10 +173,10 @@ public class FavoriteShopActivity extends AppCompatActivity  implements View.OnC
                     public boolean onLongClick(View v) {
                         Log.d("debug","クリックされました " + v.getId() + " " +mFavoriteShop.get("name").toString());
                         mFavoriteShopData = new HashMap<String,String>();
-                        mFavoriteShopData.put("product_name", mFavoriteShop.get("name").toString());
-                        mFavoriteShopData.put("createDate", mFavoriteShop.get("createDate").toString());
+                        mFavoriteShopData.put("store_name", mFavoriteShop.get("name").toString());
 
-                        //UpdateShop();
+
+                        UpdateShop();
                         return true;
                     }
                 });
@@ -183,9 +185,102 @@ public class FavoriteShopActivity extends AppCompatActivity  implements View.OnC
             Log.d("debug","error for " + e.getMessage());
         }
     }
+    public void UpdateShop(){
+        try{
+            if (helper == null) {
+                helper = new DatabaseHelper(getApplicationContext());
+            }
+            if (db == null) {
+                db = helper.getReadableDatabase();
+
+            }
+            //通信の発行
+            mQueue = Volley.newRequestQueue(this);
+            String POST_URL = "http://222.229.69.53/~goohira/toron/php/updateFavoriteShop.php";
+            //Log.d("debug","URL for FavoriteShop = " + POST_URL);
+            StringRequest stringReq=new StringRequest(Request.Method.POST,POST_URL,
+
+                    //通信成功
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String s) {
+                            try{
+
+                                String mString = s;
+                                Log.d("degug", "通信に成功しました 　結果 == " + mString);
+                                if(mString.equals("false")) {
+                                    Log.d("debug","取得失敗");
+                                }
+                                else{
+                                    Log.d("degug", "通信に成功しました 　結果 == " + mString);
+
+                                    resetFavoriteShop();
+
+                                }
+
+                                //List<Map<String,Object>> mArrayList = helper.GetFavoriteShopData(mJSONArray);
+                                //DisplayFavoriteShop(mArrayList);
+                                //レスポンスが返ってきたらDisplayFavoriteShop()を実行
+
+
+                            }catch(NullPointerException e){
+                                Log.d("degug","Nullpointエラー for FavoriteShopActivity " + e.getMessage());
+                            }
+
+                        }
+                    },
+
+                    //通信失敗
+                    new Response.ErrorListener(){
+                        @Override
+                        public void onErrorResponse(VolleyError error){
+                            Log.d("degug","通信に失敗しました " + error.getMessage());
+                        }
+                    }) {
+
+                //送信するデータを設定
+                @Override
+                protected Map<String, String> getParams() {
+                    //今回はUserIDを渡す
+
+
+
+                    String mUserID = helper.getUserID(db);
+                    //String mUserID = "12";
+                    Log.d("debug","getting UserID...   " + mUserID );
+                    mFavoriteShopData.put("user_id",mUserID);
+                    return mFavoriteShopData;
+
+                }
+            };
+            mQueue.add(stringReq);
+            //リクエストキューを発行
+
+
+
+
+            //List<Map<String,Object>> FavoriteShopList = helper.GetFavoriteShopData(helper,this);
+            //if(FavoriteShopList!=null){
+            //    Log.d("debug","FavoriteShopList success");
+            //    DisplayFavoriteShop(FavoriteShopList);
+            //}
+            //else{
+            //    Log.d("debug","FavoriteShopList failed");
+            //}
+        }catch(NullPointerException e){
+            Log.d("debug"," null poirnt exception " + e.getMessage());
+        }
+
+
+    }
     @Override
     public void onClick(View view) {
 
+    }
+    private void resetFavoriteShop(){
+        Toast.makeText(this,"お気に入り店舗を登録しました！",Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this,OtherActivity.class);
+        startActivity(intent);
     }
 
     

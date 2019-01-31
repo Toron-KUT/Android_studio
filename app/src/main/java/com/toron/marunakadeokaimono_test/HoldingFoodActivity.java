@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -363,6 +364,7 @@ public class HoldingFoodActivity extends AppCompatActivity  implements View.OnCl
 
     }
     public void  resetHoldingFood(){
+        Toast.makeText(this,"保有食品を削除しました．",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this,HoldingFoodActivity.class);
         startActivity(intent);
     }

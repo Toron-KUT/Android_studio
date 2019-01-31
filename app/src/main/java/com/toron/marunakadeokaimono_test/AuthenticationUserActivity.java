@@ -174,6 +174,7 @@ public class AuthenticationUserActivity extends AppCompatActivity {
         if(success == true){
 
             Log.d("debug","ユーザー情報のセットに成功しました");
+            Toast.makeText(this,"ログインに成功しました",Toast.LENGTH_SHORT).show();
             //Intent intent = new Intent(this, HomeActivity.class);
             Intent intent = new Intent(this, HoldingFoodActivity.class);
             startActivity(intent);
@@ -184,6 +185,7 @@ public class AuthenticationUserActivity extends AppCompatActivity {
 
     }
     public void goRegistration(){
+        Toast.makeText(this,"ログインに失敗しました",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, RegistrationUserActivity.class);
         startActivity(intent);
     }
